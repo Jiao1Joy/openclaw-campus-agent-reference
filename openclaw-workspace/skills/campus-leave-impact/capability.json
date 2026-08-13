@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "id": "campus.leave-impact",
+  "version": "1.0.0",
+  "name": "请假课程影响",
+  "description": "组合 Demo 课程查询与请假预览，展示请假期间可能错过的课程并收集申请信息。",
+  "skill": "campus-leave-impact",
+  "displayOrder": 5,
+  "demo": true,
+  "examples": ["我明天请假会错过哪些课？", "帮我看看请假期间的课程并准备申请"],
+  "routing": { "patterns": ["请假.*(错过|影响|课程|课)|会错过哪些课|请假期间.*课"], "flags": "u" },
+  "access": { "roles": ["student", "campus-operator"], "mode": "write" },
+  "execution": { "confirmation": "explicit-before-write", "idempotent": true, "auditable": true, "rollback": "none", "timeoutMs": 10000 },
+  "resultCards": ["orchestration-summary", "action-result"],
+  "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "json-stdio" },
+  "entrypoint": { "runtime": "python", "path": "scripts/compose.py" },
+  "operations": [
+    { "name": "compose-preview", "sideEffect": false, "confirmation": "none" }
+  ],
+  "orchestration": {
+    "dependencies": ["campus.course", "campus.leave"],
+    "mode": "sequential"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "id": "campus.knowledge",
+  "version": "1.0.0",
+  "name": "可信校园问答",
+  "description": "演示先检索后回答、来源卡片和无可靠依据时拒绝编造。",
+  "skill": "campus-knowledge",
+  "displayOrder": 30,
+  "demo": true,
+  "examples": ["校园卡丢了怎么办？", "图书馆借阅规则是什么？"],
+  "routing": { "patterns": ["校规|校园卡|补办|报修|借阅|图书馆|奖助学金|校医院|办公时间|办事流程"], "flags": "u" },
+  "access": { "roles": ["student", "campus-operator"], "mode": "read" },
+  "execution": { "confirmation": "none", "idempotent": false, "auditable": false, "rollback": "none", "timeoutMs": 20000 },
+  "resultCards": ["knowledge-source", "action-result"],
+  "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "legacy-cli-adapter" },
+  "entrypoint": { "runtime": "python", "path": "scripts/knowledge_manager.py" },
+  "operations": [
+    { "name": "search", "sideEffect": false, "confirmation": "none" },
+    { "name": "get", "sideEffect": false, "confirmation": "none" },
+    { "name": "list", "sideEffect": false, "confirmation": "none" }
+  ]
+}

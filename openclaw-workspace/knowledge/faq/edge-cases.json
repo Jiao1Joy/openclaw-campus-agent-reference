@@ -1,0 +1,62 @@
+[
+  {
+    "id": "KB-POLICY-OLD-001",
+    "title": "（已废止）旧版请假管理办法",
+    "questions": [
+      "旧版请假规定"
+    ],
+    "keywords": ["旧版", "废止", "请假"],
+    "content": "本条为已过期废止的旧版规定示例，仅供演示过期知识过滤，不作为正式答复。现行请假规定以 KB-POLICY-001 为准。",
+    "category": "学籍与考勤",
+    "department": "学生工作处",
+    "sourceName": "（已废止）旧版学生考勤办法",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生"],
+    "effectiveFrom": "2018-09-01",
+    "effectiveTo": "2025-12-31",
+    "updatedAt": "2025-12-01T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  },
+  {
+    "id": "KB-DRAFT-001",
+    "title": "（草稿）拟修订的考试违纪处理办法",
+    "questions": [
+      "考试违纪处理草案"
+    ],
+    "keywords": ["草稿", "草案", "考试违纪", "拟修订"],
+    "content": "本条为尚未审核发布的草稿，仅供演示未审核知识过滤，不作为正式答复。考试违纪处理以 KB-POLICY-003 为准。",
+    "category": "教学管理",
+    "department": "教务处",
+    "sourceName": "（内部草稿）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-15T10:00:00+08:00",
+    "status": "draft",
+    "trustLevel": "unverified",
+    "isDemo": true
+  },
+  {
+    "id": "KB-INCOMPLETE-001",
+    "title": "（待补充来源）示例不完整知识",
+    "questions": [
+      "示例不完整知识"
+    ],
+    "keywords": ["示例", "不完整"],
+    "content": "本条故意缺少有效来源名称和生效时间，供 validate 命令演示校验结果。",
+    "category": "校园服务",
+    "department": "",
+    "sourceName": "",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生"],
+    "effectiveFrom": null,
+    "effectiveTo": null,
+    "updatedAt": "2026-07-01T10:00:00+08:00",
+    "status": "draft",
+    "trustLevel": "unverified",
+    "isDemo": true
+  }
+]

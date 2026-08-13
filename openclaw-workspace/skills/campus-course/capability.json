@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "id": "campus.course",
+  "version": "1.0.0",
+  "name": "智能选课",
+  "description": "演示确定性规则、教师选择、方案确认、事务恢复和补偿回滚。",
+  "skill": "campus-course",
+  "displayOrder": 20,
+  "demo": true,
+  "examples": ["帮我智能选课", "查询我的选课记录"],
+  "routing": { "patterns": ["选课|课程|培养方案|必修课|选修课|教师|教学班"], "flags": "u" },
+  "access": { "roles": ["student", "campus-operator"], "mode": "write" },
+  "execution": { "confirmation": "explicit-before-write", "idempotent": true, "auditable": true, "rollback": "operator-compensation", "timeoutMs": 20000 },
+  "resultCards": ["teacher-choice", "action-result"],
+  "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "legacy-cli-adapter" },
+  "entrypoint": { "runtime": "python", "path": "scripts/course_manager.py" },
+  "operations": [
+    { "name": "analyze", "sideEffect": false, "confirmation": "none" },
+    { "name": "plan", "sideEffect": false, "confirmation": "none" },
+    { "name": "submit", "sideEffect": true, "confirmation": "explicit-before-write" },
+    { "name": "list", "sideEffect": false, "confirmation": "none" },
+    { "name": "rollback", "sideEffect": true, "confirmation": "explicit-before-write" }
+  ]
+}

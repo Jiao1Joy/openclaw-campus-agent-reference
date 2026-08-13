@@ -1,0 +1,49 @@
+[
+  {
+    "id": "KB-COURSE-001",
+    "title": "培养方案与毕业学分构成",
+    "questions": [
+      "培养方案",
+      "毕业学分要求",
+      "必修选修学分",
+      "通识学分",
+      "学分构成"
+    ],
+    "keywords": ["培养方案", "学分", "必修", "选修", "通识", "实践", "毕业"],
+    "content": "本科生按入学当年所在专业的培养方案修读，毕业总学分一般由通识教育课程、学科基础课程、专业核心课程、专业选修课程和集中实践环节构成，各专业具体学分要求以培养方案为准。培养方案可在校园门户“教学服务 → 培养方案”中查询本人适用版本。",
+    "category": "教学管理",
+    "department": "教务处",
+    "sourceName": "本科培养方案管理办法（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校本科生"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  },
+  {
+    "id": "KB-COURSE-002",
+    "title": "体育课与体测要求",
+    "questions": [
+      "体育课要求",
+      "体测",
+      "体质测试",
+      "体育选修"
+    ],
+    "keywords": ["体育", "体测", "体质测试", "运动", "体锻"],
+    "content": "本科一至二年级体育为必修课，三、四年级须参加体质健康测试，体测成绩计入综合素质档案。因伤病无法参加体育课或体测的，须凭校医院证明申请体育保健课或缓测。具体要求以体育教学部当学期通知为准。",
+    "category": "教学管理",
+    "department": "体育教学部",
+    "sourceName": "体育教学管理办法（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校本科生"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  }
+]

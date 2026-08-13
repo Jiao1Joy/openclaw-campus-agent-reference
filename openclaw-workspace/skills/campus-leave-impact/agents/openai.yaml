@@ -1,0 +1,4 @@
+interface:
+  display_name: "请假课程影响"
+  short_description: "组合课程查询和请假预览，清晰展示请假可能错过的课程"
+  default_prompt: "分析我的请假时间会错过哪些 Demo 课程，并生成待确认请假预览。"

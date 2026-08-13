@@ -1,0 +1,4 @@
+interface:
+  display_name: "校园 Skill 模板"
+  short_description: "创建符合 OpenClaw 校园助手协议的可扩展 Skill"
+  default_prompt: "使用该模板实现一个新的 OpenClaw 智能校园 Demo Skill。"

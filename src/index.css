@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+ * 全局基础样式
+ * ============================================================ */
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-surface-page text-ink font-sans;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* 全局焦点态 - 满足无障碍验收 §8 */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand/50 ring-offset-2 ring-offset-white;
+  }
+
+  /* 选中文本 */
+  ::selection {
+    background-color: rgba(36, 87, 214, 0.18);
+    color: #18243a;
+  }
+}
+
+@layer components {
+  /* 页面容器：最大 1320，响应式左右留白 */
+  .page-container {
+    @apply mx-auto w-full max-w-container px-4 sm:px-6 lg:px-12;
+  }
+
+  /* 通用卡片 */
+  .card-base {
+    @apply rounded-card border border-surface-border bg-surface-card shadow-card transition-all duration-200;
+  }
+
+  /* 模块标题（H2 级别） */
+  .module-title {
+    @apply text-[22px] font-semibold leading-tight text-ink;
+  }
+
+  /* 卡片标题 */
+  .card-title {
+    @apply text-card-title text-ink;
+  }
+
+  /* 主按钮 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn bg-brand px-5 py-2.5
+           text-sm font-medium text-white shadow-sm transition-all
+           hover:bg-brand-hover hover:shadow-md
+           active:scale-[0.98]
+           disabled:cursor-not-allowed disabled:bg-ink-muted disabled:opacity-60;
+  }
+
+  /* 次按钮 */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn border border-surface-border bg-white
+           px-5 py-2.5 text-sm font-medium text-ink-body transition-all
+           hover:border-brand hover:text-brand
+           active:scale-[0.98];
+  }
+
+  /* 文字链接按钮（卡片底部「查看全部」类） */
+  .link-more {
+    @apply inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors
+           hover:text-brand-hover;
+  }
+}
+
+@layer utilities {
+  /* 隐藏滚动条（用于活动横滚区域） */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 骨架屏光泽动画 */
+  .skeleton {
+    @apply relative overflow-hidden bg-surface-border/60;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: skeleton-shimmer 1.4s infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes assistant-thinking {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.assistant-thinking-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #718096;
+  animation: assistant-thinking 1s ease-in-out infinite;
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

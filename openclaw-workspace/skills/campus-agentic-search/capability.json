@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "id": "campus.agentic-search",
+  "version": "1.0.0",
+  "name": "校园深度检索",
+  "description": "面向包含多个子问题、比较、条件或证据缺口的复杂校园问答，由 OpenClaw 规划并迭代检索本地校园知识库，禁止联网。",
+  "skill": "campus-agentic-search",
+  "displayOrder": 29,
+  "demo": true,
+  "examples": [
+    "校园卡丢了，明天还要进图书馆，周末能不能补办，我现在应该先做什么？",
+    "宿舍漏水又赶上周末，应该联系谁、怎么报修、多久能处理？"
+  ],
+  "routing": {
+    "patterns": ["(同时|另外|还要|并且|以及|分别|比较|应该先|怎么办.*(还|又)|能不能.*(同时|还|并))"],
+    "flags": "u"
+  },
+  "access": { "roles": ["student", "campus-operator"], "mode": "read" },
+  "execution": {
+    "confirmation": "none",
+    "idempotent": false,
+    "auditable": false,
+    "rollback": "none",
+    "timeoutMs": 90000
+  },
+  "resultCards": ["knowledge-source", "action-result"],
+  "contract": {
+    "input": "campus-skill-input@1",
+    "output": "campus-skill-output@1",
+    "transport": "json-stdio"
+  },
+  "entrypoint": { "runtime": "python", "path": "scripts/agentic_search.py" },
+  "operations": [
+    { "name": "plan-local-search", "sideEffect": false, "confirmation": "none" },
+    { "name": "search-local-knowledge", "sideEffect": false, "confirmation": "none" }
+  ],
+  "orchestration": {
+    "dependencies": ["campus.knowledge"],
+    "mode": "sequential"
+  }
+}

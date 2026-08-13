@@ -1,0 +1,94 @@
+[
+  {
+    "id": "KB-FAQ-001",
+    "title": "校园无线网络使用",
+    "questions": [
+      "校园网怎么连",
+      "校园wifi",
+      "无线网密码",
+      "校园网账号"
+    ],
+    "keywords": ["校园网", "无线", "wifi", "网络", "上网", "账号"],
+    "content": "校园无线网络名称为 Yunchuan-WiFi，覆盖教学楼、图书馆、宿舍等公共区域。学生使用学号作为账号，初始密码为身份证后六位（X 用 0 替代），首次登录后须修改密码。如忘记密码可在信息与网络中心自助平台重置。",
+    "category": "校园服务",
+    "department": "信息与网络中心",
+    "sourceName": "校园网络服务指南（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生", "全体教职工"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  },
+  {
+    "id": "KB-FAQ-002",
+    "title": "校园班车时刻",
+    "questions": [
+      "校车时刻",
+      "校园班车",
+      "校车几点",
+      "班车路线"
+    ],
+    "keywords": ["班车", "校车", "时刻", "路线", "通勤"],
+    "content": "校园班车在工作日运行，连接主校区与东校区，高峰时段（早 7:30–9:00、晚 16:30–18:00）每 15 分钟一班，平峰时段每 30 分钟一班，凭校园卡免费乘坐。寒暑假及法定节假日停运，具体以后勤保障处通告为准。",
+    "category": "校园服务",
+    "department": "后勤保障处",
+    "sourceName": "校园交通服务指南（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生", "全体教职工"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  },
+  {
+    "id": "KB-FAQ-003",
+    "title": "失物招领",
+    "questions": [
+      "东西丢了在哪找",
+      "失物招领",
+      "捡到东西交哪",
+      "找失物"
+    ],
+    "keywords": ["失物", "招领", "丢失", "拾物"],
+    "content": "校园失物招领统一由学生事务大厅窗口登记保管，捡到的物品可交至该窗口，遗失物品可前往登记查询或登录校园门户“失物招领”栏目在线查询。贵重物品保管期为 6 个月，逾期无人认领的按学校相关规定处理。",
+    "category": "校园服务",
+    "department": "学生工作处",
+    "sourceName": "学生事务办事指南（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生", "全体教职工"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  },
+  {
+    "id": "KB-FAQ-004",
+    "title": "心理咨询预约",
+    "questions": [
+      "心理咨询",
+      "心情不好",
+      "心理预约",
+      "心理咨询中心"
+    ],
+    "keywords": ["心理", "咨询", "情绪", "压力", "预约"],
+    "content": "心理健康教育中心面向全体在校学生提供免费心理咨询，可在校园门户“心理服务”在线预约，也可到中心前台预约。中心严格保密咨询内容。如遇紧急情绪危机，可拨打中心 24 小时值班电话或直接前往中心。",
+    "category": "校园服务",
+    "department": "学生工作处",
+    "sourceName": "心理健康服务指南（演示版）",
+    "sourceUrl": "",
+    "applicableGroups": ["全体在校生"],
+    "effectiveFrom": "2026-01-01",
+    "effectiveTo": null,
+    "updatedAt": "2026-07-21T10:00:00+08:00",
+    "status": "published",
+    "trustLevel": "official-demo",
+    "isDemo": true
+  }
+]

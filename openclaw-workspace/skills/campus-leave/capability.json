@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "id": "campus.leave",
+  "version": "1.0.0",
+  "name": "智能请假",
+  "description": "演示参数收集、执行预览、明确确认、幂等写入和撤销。",
+  "skill": "campus-leave",
+  "displayOrder": 10,
+  "demo": true,
+  "examples": ["我明天上午想请病假", "查询我的请假记录"],
+  "routing": { "patterns": ["请假|病假|事假|公假|销假|离校|请假记录"], "flags": "u" },
+  "access": { "roles": ["student", "campus-operator"], "mode": "write" },
+  "execution": { "confirmation": "explicit-before-write", "idempotent": true, "auditable": true, "rollback": "student-cancel", "timeoutMs": 20000 },
+  "resultCards": ["action-result"],
+  "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "legacy-cli-adapter" },
+  "entrypoint": { "runtime": "python", "path": "scripts/leave_manager.py" },
+  "operations": [
+    { "name": "create", "sideEffect": true, "confirmation": "explicit-before-write" },
+    { "name": "list", "sideEffect": false, "confirmation": "none" },
+    { "name": "cancel", "sideEffect": true, "confirmation": "explicit-before-write" }
+  ]
+}

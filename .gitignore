@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+dist-server
+*.local
+*.tsbuildinfo
+evals/results/*.jsonl
+evals/results/*.md
+
+# OpenClaw runtime state: only the committed Demo baseline belongs in source control.
+openclaw-workspace/data/*
+!openclaw-workspace/data/course-data.json
+openclaw-workspace/data/**/*.lock
+openclaw-workspace/data/**/*-transaction.json
+openclaw-workspace/openclaw-workspace-state.json
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Local secrets and OpenClaw machine configuration
+.env
+.env.*
+!.env.example
+openclaw.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

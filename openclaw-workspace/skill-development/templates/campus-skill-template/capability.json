@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "enabled": false,
+  "id": "campus.example-skill",
+  "version": "0.1.0",
+  "name": "示例校园能力",
+  "description": "用于验证 OpenClaw 校园 Skill 标准契约的未启用模板。",
+  "skill": "campus-skill-template",
+  "displayOrder": 100,
+  "demo": true,
+  "examples": ["预览一个演示任务"],
+  "routing": { "patterns": ["演示任务"], "flags": "u" },
+  "access": { "roles": ["student", "campus-operator"], "mode": "write" },
+  "execution": { "confirmation": "explicit-before-write", "idempotent": true, "auditable": true, "rollback": "none", "timeoutMs": 10000 },
+  "resultCards": ["action-result"],
+  "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "json-stdio" },
+  "entrypoint": { "runtime": "python", "path": "scripts/skill.py" },
+  "operations": [
+    { "name": "preview", "sideEffect": false, "confirmation": "none" },
+    { "name": "execute", "sideEffect": true, "confirmation": "explicit-before-write" }
+  ]
+}
