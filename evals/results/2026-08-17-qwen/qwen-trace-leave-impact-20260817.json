@@ -1,0 +1,136 @@
+{
+  "requestId": "qwen-trace-leave-impact-20260817",
+  "events": [
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "request.received",
+      "label": "收到脱敏后的校园助手请求",
+      "outcome": "started",
+      "sequence": 1,
+      "timestamp": "2026-08-17T03:04:30.172Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.started",
+      "label": "OpenClaw LLM 理解意图并提取参数：开始",
+      "tool": "openclaw-router",
+      "outcome": "started",
+      "sequence": 2,
+      "timestamp": "2026-08-17T03:04:30.185Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.completed",
+      "label": "OpenClaw LLM 理解意图并提取参数：完成",
+      "tool": "openclaw-router",
+      "durationMs": 26934,
+      "outcome": "succeeded",
+      "sequence": 3,
+      "timestamp": "2026-08-17T03:04:57.119Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "capability.routed",
+      "label": "OpenClaw LLM 已选择：请假课程影响",
+      "capabilityId": "campus.leave-impact",
+      "routeSource": "llm",
+      "outcome": "succeeded",
+      "sequence": 4,
+      "timestamp": "2026-08-17T03:04:57.123Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.started",
+      "label": "查询请假日期的 Demo 课程影响：开始",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-course",
+      "outcome": "started",
+      "sequence": 5,
+      "timestamp": "2026-08-17T03:04:57.137Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.completed",
+      "label": "查询请假日期的 Demo 课程影响：完成",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-course",
+      "durationMs": 7,
+      "outcome": "succeeded",
+      "sequence": 6,
+      "timestamp": "2026-08-17T03:04:57.144Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.started",
+      "label": "生成只读请假预览：开始",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-leave",
+      "outcome": "started",
+      "sequence": 7,
+      "timestamp": "2026-08-17T03:04:57.148Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.completed",
+      "label": "生成只读请假预览：完成",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-leave",
+      "durationMs": 4,
+      "outcome": "succeeded",
+      "sequence": 8,
+      "timestamp": "2026-08-17T03:04:57.152Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.started",
+      "label": "组合多 Skill 结果：开始",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-leave-impact",
+      "outcome": "started",
+      "sequence": 9,
+      "timestamp": "2026-08-17T03:04:57.158Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "tool.completed",
+      "label": "组合多 Skill 结果：完成",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "tool": "campus-leave-impact",
+      "durationMs": 1083,
+      "outcome": "succeeded",
+      "sequence": 10,
+      "timestamp": "2026-08-17T03:04:58.241Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "execution.state",
+      "label": "执行状态：awaiting-confirmation",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "phase": "confirm",
+      "status": "awaiting-confirmation",
+      "outcome": "succeeded",
+      "replayed": false,
+      "sequence": 11,
+      "timestamp": "2026-08-17T03:04:58.269Z"
+    },
+    {
+      "requestId": "qwen-trace-leave-impact-20260817",
+      "event": "request.completed",
+      "label": "本轮处理完成",
+      "capabilityId": "campus.leave-impact",
+      "executionId": "EX-944d571a-c80a-41e0-9af1-a4db771de41d",
+      "durationMs": 28137,
+      "outcome": "succeeded",
+      "replayed": false,
+      "sequence": 12,
+      "timestamp": "2026-08-17T03:04:58.273Z"
+    }
+  ]
+}

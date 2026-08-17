@@ -1,0 +1,217 @@
+{
+  "requestId": "qwen-trace-agentic-search-20260817",
+  "events": [
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "request.received",
+      "label": "收到脱敏后的校园助手请求",
+      "outcome": "started",
+      "sequence": 1,
+      "timestamp": "2026-08-17T03:05:14.742Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "OpenClaw LLM 理解意图并提取参数：开始",
+      "tool": "openclaw-router",
+      "outcome": "started",
+      "sequence": 2,
+      "timestamp": "2026-08-17T03:05:14.753Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "OpenClaw LLM 理解意图并提取参数：完成",
+      "tool": "openclaw-router",
+      "durationMs": 25568,
+      "outcome": "succeeded",
+      "sequence": 3,
+      "timestamp": "2026-08-17T03:05:40.321Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "capability.routed",
+      "label": "OpenClaw LLM 已选择：校园深度检索",
+      "capabilityId": "campus.agentic-search",
+      "routeSource": "llm",
+      "outcome": "succeeded",
+      "sequence": 4,
+      "timestamp": "2026-08-17T03:05:40.324Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "OpenClaw 拆解复杂问题并规划本地查询：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-agentic-search",
+      "outcome": "started",
+      "sequence": 5,
+      "timestamp": "2026-08-17T03:05:40.337Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "OpenClaw 拆解复杂问题并规划本地查询：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-agentic-search",
+      "durationMs": 58375,
+      "outcome": "succeeded",
+      "sequence": 6,
+      "timestamp": "2026-08-17T03:06:38.711Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "execution.state",
+      "label": "模型输出格式已修复一次并通过校验",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "phase": "repaired",
+      "status": "executing",
+      "outcome": "succeeded",
+      "sequence": 7,
+      "timestamp": "2026-08-17T03:06:38.715Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "仅检索本地校园知识库：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "outcome": "started",
+      "sequence": 8,
+      "timestamp": "2026-08-17T03:06:38.719Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "仅检索本地校园知识库：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "durationMs": 603,
+      "outcome": "succeeded",
+      "sequence": 9,
+      "timestamp": "2026-08-17T03:06:39.323Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "仅检索本地校园知识库：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "outcome": "started",
+      "sequence": 10,
+      "timestamp": "2026-08-17T03:06:39.327Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "仅检索本地校园知识库：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "durationMs": 317,
+      "outcome": "succeeded",
+      "sequence": 11,
+      "timestamp": "2026-08-17T03:06:39.644Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "仅检索本地校园知识库：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "outcome": "started",
+      "sequence": 12,
+      "timestamp": "2026-08-17T03:06:39.648Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "仅检索本地校园知识库：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "durationMs": 259,
+      "outcome": "succeeded",
+      "sequence": 13,
+      "timestamp": "2026-08-17T03:06:39.907Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "仅检索本地校园知识库：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "outcome": "started",
+      "sequence": 14,
+      "timestamp": "2026-08-17T03:06:39.912Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "仅检索本地校园知识库：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "durationMs": 265,
+      "outcome": "succeeded",
+      "sequence": 15,
+      "timestamp": "2026-08-17T03:06:40.177Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.started",
+      "label": "仅检索本地校园知识库：开始",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "outcome": "started",
+      "sequence": 16,
+      "timestamp": "2026-08-17T03:06:40.182Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "tool.completed",
+      "label": "仅检索本地校园知识库：完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "tool": "campus-knowledge",
+      "durationMs": 291,
+      "outcome": "succeeded",
+      "sequence": 17,
+      "timestamp": "2026-08-17T03:06:40.472Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "execution.state",
+      "label": "执行状态：succeeded",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "phase": "local-search-completed",
+      "status": "succeeded",
+      "outcome": "succeeded",
+      "replayed": false,
+      "sequence": 18,
+      "timestamp": "2026-08-17T03:06:40.501Z"
+    },
+    {
+      "requestId": "qwen-trace-agentic-search-20260817",
+      "event": "request.completed",
+      "label": "本轮处理完成",
+      "capabilityId": "campus.agentic-search",
+      "executionId": "EX-35a1cc90-005c-43f5-94a7-d38316947bf4",
+      "durationMs": 85766,
+      "outcome": "succeeded",
+      "replayed": false,
+      "sequence": 19,
+      "timestamp": "2026-08-17T03:06:40.505Z"
+    }
+  ]
+}
