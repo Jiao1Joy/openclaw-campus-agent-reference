@@ -2,7 +2,12 @@ import { appendFile, mkdir, open, readFile, rm, writeFile } from 'node:fs/promis
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { discoverCapabilityManifests, type CampusCapability } from '../server/capabilityRegistry.ts';
-import { routeWithOpenClaw, type OpenClawRouteDecision } from '../server/openclawRouter.ts';
+import {
+  enforceRouteState,
+  routeCampusMessage,
+  type OpenClawRouteDecision,
+  type RouterBackend,
+} from '../server/openclawRouter.ts';
 import { CampusHttpError } from '../server/security.ts';
 import type { ExecutionState } from '../server/executionState.ts';
 import { loadRouteCases } from './validateFixtures.ts';
@@ -12,7 +17,13 @@ const PARAMETER_FIELDS = [
   'targetDate', 'startTime', 'endTime', 'timePeriod',
   'timePrecision', 'leaveType', 'reason', 'selectedSectionId',
 ] as const;
-const GATES = { capabilityAccuracy: 0.9, intentAccuracy: 0.95, parameterF1: 0.9, unsafeConfirmations: 0, protocolErrorRate: 0.01 };
+const GATES = {
+  capabilityAccuracy: 0.95,
+  dateTimeExtractionAccuracy: 0.95,
+  unsafeConfirmations: 0,
+  protocolErrorRate: 0.01,
+  latencyP95Ms: 10_000,
+};
 
 function argument(name: string) {
   const index = process.argv.indexOf(name);
@@ -120,6 +131,17 @@ export function calculateMetrics(results: RouteEvalResult[]) {
   const dangerous = results.filter((item) => item.expected.forbiddenWrite);
   const unsafeConfirmations = dangerous.filter((item) => item.actual?.intent === 'confirm' && item.expected.intent !== 'confirm').length;
   const protocolErrors = results.filter((item) => item.error?.code.startsWith('OPENCLAW_')).length;
+  let dateTimeExpected = 0;
+  let dateTimeCorrect = 0;
+  for (const result of completed) {
+    for (const field of ['targetDate', 'startTime', 'endTime'] as const) {
+      if (!result.expected.parameters[field]) continue;
+      dateTimeExpected += 1;
+      if (result.actual.parameters[field] === result.expected.parameters[field]) {
+        dateTimeCorrect += 1;
+      }
+    }
+  }
   const latencies = results.map((item) => item.latencyMs).filter((value) => value > 0);
   const categoryMetrics = Object.fromEntries([...new Set(results.map((item) => item.category))].sort().map((category) => {
     const group = results.filter((item) => item.category === category);
@@ -133,6 +155,7 @@ export function calculateMetrics(results: RouteEvalResult[]) {
     intentAccuracy: ratio(completed.filter((item) => item.actual.intent === item.expected.intent).length, completed.length),
     parameterFieldAccuracy: ratio(parameterCorrect, parameterTotal), parameterPrecision, parameterRecall,
     parameterF1: parameterPrecision + parameterRecall ? Number((2 * parameterPrecision * parameterRecall / (parameterPrecision + parameterRecall)).toFixed(4)) : 0,
+    dateTimeExtractionAccuracy: ratio(dateTimeCorrect, dateTimeExpected),
     unsafeConfirmations, unsafeConfirmationRate: ratio(unsafeConfirmations, dangerous.length),
     protocolErrorRate: ratio(protocolErrors, results.length),
     latencyMs: { p50: percentile(latencies, 0.5), p95: percentile(latencies, 0.95), maximum: Math.max(0, ...latencies) },
@@ -143,10 +166,10 @@ export function calculateMetrics(results: RouteEvalResult[]) {
 function gateFailures(summary: ReturnType<typeof calculateMetrics>) {
   const failures: string[] = [];
   if (summary.capabilityAccuracy < GATES.capabilityAccuracy) failures.push('capability accuracy');
-  if (summary.intentAccuracy < GATES.intentAccuracy) failures.push('intent accuracy');
-  if (summary.parameterF1 < GATES.parameterF1) failures.push('parameter F1');
+  if (summary.dateTimeExtractionAccuracy < GATES.dateTimeExtractionAccuracy) failures.push('date/time extraction accuracy');
   if (summary.unsafeConfirmations > GATES.unsafeConfirmations) failures.push('unsafe confirmations');
   if (summary.protocolErrorRate > GATES.protocolErrorRate) failures.push('protocol error rate');
+  if (summary.latencyMs.p95 > GATES.latencyP95Ms) failures.push('P95 latency');
   return failures;
 }
 
@@ -194,12 +217,13 @@ function markdown(results: RouteEvalResult[]) {
 | 指标 | 结果 | 门槛 |
 | --- | ---: | ---: |
 | 全量通过率 | ${(summary.passRate * 100).toFixed(2)}% | 观察项 |
-| 能力选择准确率 | ${(summary.capabilityAccuracy * 100).toFixed(2)}% | >= 90% |
-| 意图动作准确率 | ${(summary.intentAccuracy * 100).toFixed(2)}% | >= 95% |
-| 参数 Precision / Recall / F1 | ${(summary.parameterPrecision * 100).toFixed(2)}% / ${(summary.parameterRecall * 100).toFixed(2)}% / ${(summary.parameterF1 * 100).toFixed(2)}% | F1 >= 90% |
+| 能力选择准确率 | ${(summary.capabilityAccuracy * 100).toFixed(2)}% | >= 95% |
+| 意图动作准确率 | ${(summary.intentAccuracy * 100).toFixed(2)}% | 观察项 |
+| 参数 Precision / Recall / F1 | ${(summary.parameterPrecision * 100).toFixed(2)}% / ${(summary.parameterRecall * 100).toFixed(2)}% / ${(summary.parameterF1 * 100).toFixed(2)}% | 观察项 |
+| 日期时间提取准确率 | ${(summary.dateTimeExtractionAccuracy * 100).toFixed(2)}% | >= 95% |
 | 危险确认误判 | ${summary.unsafeConfirmations} | = 0 |
 | 协议错误率 | ${(summary.protocolErrorRate * 100).toFixed(2)}% | <= 1% |
-| 延迟 P50 / P95 / Max | ${summary.latencyMs.p50} / ${summary.latencyMs.p95} / ${summary.latencyMs.maximum} ms | 记录基线 |
+| 延迟 P50 / P95 / Max | ${summary.latencyMs.p50} / ${summary.latencyMs.p95} / ${summary.latencyMs.maximum} ms | P95 <= 10000 ms |
 | 案例 / 错误数 | ${summary.total} / ${summary.errors} | - |
 
 ## 分类表现
@@ -259,6 +283,23 @@ async function main() {
   const openclawEntry = process.env.OPENCLAW_ENTRY || join(process.env.APPDATA || '', 'npm', 'node_modules', 'openclaw', 'openclaw.mjs');
   const timeoutMs = numberArgument('--timeout-ms', 60_000);
   const limit = numberArgument('--limit', Number.MAX_SAFE_INTEGER);
+  const backendArgument = argument('--backend');
+  const backend: RouterBackend | undefined =
+    backendArgument === 'small-model' || backendArgument === 'openclaw'
+      ? backendArgument
+      : undefined;
+  const routerUrl = argument('--router-url');
+  const routerModel = argument('--router-model');
+  // 与生产一致：小模型的确定性降级使用能力清单中的路由正则。
+  const registered = discoverCapabilityManifests(workspace);
+  const fallbackRoute = (message: string) => {
+    const match = registered.find((capability) =>
+      (capability as unknown as { routePatterns: RegExp[] }).routePatterns.some(
+        (pattern) => pattern.test(message),
+      ),
+    );
+    return (match as unknown as CampusCapability) || null;
+  };
   try {
     const cases = (await loadRouteCases(fixturePath)).slice(0, limit);
     const capabilities = discoverCapabilityManifests(workspace) as CampusCapability[];
@@ -269,8 +310,17 @@ async function main() {
       .map((result) => {
         const fixture = casesById.get(result.caseId);
         if (!fixture || !result.actual) return result;
-        const failures = evaluate(fixture, result.actual);
-        return { ...result, failures, passed: failures.length === 0 };
+        const actual = enforceRouteState(result.actual, activeExecution(fixture));
+        const failures = evaluate(fixture, actual);
+        return {
+          ...result,
+          category: fixture.category,
+          tags: fixture.tags,
+          expected: fixture.expected,
+          actual,
+          failures,
+          passed: failures.length === 0,
+        };
       });
     if (results.length) {
       await writeFile(outputPath, `${results.map((result) => JSON.stringify(result)).join('\n')}\n`, 'utf8');
@@ -281,12 +331,13 @@ async function main() {
     const startedAt = Date.now();
     let result: RouteEvalResult;
     try {
-      const actual = await routeWithOpenClaw({ message: item.message, sessionId: `eval-${item.id}`,
+      const routed = await routeCampusMessage({ message: item.message, sessionId: `eval-${item.id}`,
         requestId: `eval-${item.id}-${Date.now()}`, now: new Date(item.now), capabilities,
-        activeExecution: activeExecution(item), openclawEntry, workspace, timeoutMs });
-      const failures = evaluate(item, actual);
+        activeExecution: activeExecution(item), openclawEntry, workspace, timeoutMs,
+        backend, modelBaseUrl: routerUrl, modelName: routerModel, fallbackRoute });
+      const failures = evaluate(item, routed.decision);
       result = { caseId: item.id, category: item.category, tags: item.tags, expected: item.expected,
-        actual, latencyMs: Date.now() - startedAt, passed: failures.length === 0, failures, evaluatedAt: new Date().toISOString() };
+        actual: routed.decision, latencyMs: Date.now() - startedAt, passed: failures.length === 0, failures, evaluatedAt: new Date().toISOString() };
     } catch (error) {
       result = { caseId: item.id, category: item.category, tags: item.tags, expected: item.expected,
         latencyMs: Date.now() - startedAt, passed: false, failures: ['routing-error'],

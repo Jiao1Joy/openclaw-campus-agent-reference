@@ -1,6 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { execFile } from 'node:child_process';
-import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { promisify } from 'node:util';
@@ -24,7 +23,7 @@ import {
   routeCapability,
 } from './capabilityRegistry.ts';
 import {
-  routeWithOpenClaw,
+  routeCampusMessage,
   type OpenClawRouteDecision,
   type OpenClawRouteParameters,
 } from './openclawRouter.ts';
@@ -53,6 +52,12 @@ import {
   planLocalAgenticSearch,
   type AgenticSearchResult,
 } from './agenticSearch.ts';
+import {
+  ADMIN_SERVICE_CLI,
+  LEAVE_SERVICE_CLI as LEAVE_ENGINE,
+  runCampusService,
+} from './campusServices.ts';
+import { processWithCampusAdminAgent } from './campusAdminAgent.ts';
 
 const execFileAsync = promisify(execFile);
 
@@ -70,12 +75,8 @@ function boundedEnvironmentNumber(
 
 const OPENCLAW_HOME =
   process.env.OPENCLAW_HOME || join(process.env.USERPROFILE || '', '.openclaw');
-const REFERENCE_WORKSPACE = join(process.cwd(), 'openclaw-workspace');
 const OPENCLAW_WORKSPACE =
-  process.env.CAMPUS_WORKSPACE ||
-  (existsSync(REFERENCE_WORKSPACE)
-    ? REFERENCE_WORKSPACE
-    : join(OPENCLAW_HOME, 'workspace-campus'));
+  process.env.CAMPUS_WORKSPACE || join(OPENCLAW_HOME, 'workspace-campus');
 const OPENCLAW_ENTRY =
   process.env.OPENCLAW_ENTRY ||
   join(
@@ -85,11 +86,6 @@ const OPENCLAW_ENTRY =
     'openclaw',
     'openclaw.mjs',
   );
-const LEAVE_DATA_FILE = join(
-  OPENCLAW_WORKSPACE,
-  'data',
-  'leave-requests.json',
-);
 const COURSE_DATA_FILE = join(OPENCLAW_WORKSPACE, 'data', 'course-data.json');
 const COURSE_ENGINE = join(
   OPENCLAW_WORKSPACE,
@@ -97,13 +93,6 @@ const COURSE_ENGINE = join(
   'campus-course',
   'scripts',
   'course_manager.py',
-);
-const LEAVE_ENGINE = join(
-  OPENCLAW_WORKSPACE,
-  'skills',
-  'campus-leave',
-  'scripts',
-  'leave_manager.py',
 );
 const KNOWLEDGE_ENGINE = join(
   OPENCLAW_WORKSPACE,
@@ -139,9 +128,9 @@ const OPENCLAW_TIMEOUT_MS = boundedEnvironmentNumber(
 );
 const OPENCLAW_ROUTER_TIMEOUT_MS = boundedEnvironmentNumber(
   'CAMPUS_OPENCLAW_ROUTER_TIMEOUT_MS',
-  60_000,
+  15_000,
   5_000,
-  120_000,
+  30_000,
 );
 const ENGINE_TIMEOUT_MS = boundedEnvironmentNumber(
   'CAMPUS_ENGINE_TIMEOUT_MS',
@@ -149,6 +138,18 @@ const ENGINE_TIMEOUT_MS = boundedEnvironmentNumber(
   2_000,
   60_000,
 );
+const PREVIEW_TTL_MS = boundedEnvironmentNumber(
+  'CAMPUS_PREVIEW_TTL_MS',
+  10 * 60 * 1000,
+  60_000,
+  30 * 60 * 1000,
+);
+// 纯确认/纯取消表达由本地状态机在 Router 之前处理；带参数修改的复合句
+// （如“确认，但时间改到下午五点”）不匹配这两个锚定正则，仍需重新理解。
+const PURE_CONFIRM_PATTERN =
+  /^(?:确认|确认提交|同意提交|按这个方案提交|可以提交)[。！!～\s]*$/u;
+const PURE_CANCEL_PATTERN =
+  /^(?:取消|不提交|取消提交|取消当前申请|取消本次申请)[。！!～\s]*$/u;
 const auditLedger = new AuditLedger(API_AUDIT_FILE);
 const idempotencyStore = new IdempotencyStore(
   IDEMPOTENCY_FILE,
@@ -580,13 +581,12 @@ async function runLeaveEngine(
 ) {
   try {
     const { stdout } = await execFileAsync(
-      process.env.PYTHON || 'python',
+      process.env.NODE_BIN || 'node',
       [LEAVE_ENGINE, command, ...args],
       {
         cwd: OPENCLAW_WORKSPACE,
         env: {
           ...process.env,
-          PYTHONIOENCODING: 'utf-8',
           CAMPUS_IDEMPOTENCY_KEY: idempotencyKey,
           CAMPUS_REQUEST_ID: requestId,
         },
@@ -941,16 +941,13 @@ function leavePreviewFromMessage(
 ) {
   const leaveType = parameters?.leaveType || String(previous.leaveType || '');
   // “上午/下午”可用于只读课程筛选，但不能作为请假提交所需的精确时间。
-  const window = parameters?.timePrecision === 'exact' &&
-      parameters.startTime && parameters.endTime
-    ? { start: parameters.startTime, end: parameters.endTime }
-    :
-    (previous.start && previous.end
-      ? {
-          start: String(previous.start).slice(11, 16),
-          end: String(previous.end).slice(11, 16),
-        }
-      : null);
+  const previousStart = previous.start ? String(previous.start).slice(11, 16) : '';
+  const previousEnd = previous.end ? String(previous.end).slice(11, 16) : '';
+  const mergedStart = parameters?.startTime || previousStart;
+  const mergedEnd = parameters?.endTime || previousEnd;
+  const window = mergedStart && mergedEnd
+    ? { start: mergedStart, end: mergedEnd }
+    : null;
   const missing: string[] = [];
   if (!targetDate) missing.push('请假日期');
   if (!window) missing.push('精确时间范围');
@@ -972,147 +969,553 @@ function leavePreviewFromMessage(
   };
 }
 
-async function handleLeaveImpactOrchestration(
+type PureConfirmationKind = 'confirm' | 'cancel';
+
+function classifyPureConfirmation(message: string): PureConfirmationKind | null {
+  const trimmed = message.trim();
+  if (PURE_CONFIRM_PATTERN.test(trimmed)) return 'confirm';
+  if (PURE_CANCEL_PATTERN.test(trimmed)) return 'cancel';
+  return null;
+}
+
+function isLeaveCapability(capabilityId: string) {
+  return capabilityId === 'campus.leave' || capabilityId === 'campus.leave-impact';
+}
+
+function leavePreviewSnapshot(context: JsonObject) {
+  return {
+    targetDate: String(context.targetDate || ''),
+    leaveType: String(context.leaveType || ''),
+    start: String(context.start || ''),
+    end: String(context.end || ''),
+    reason: String(context.reason || '').trim(),
+  };
+}
+
+function previewDeadline(execution: ExecutionState) {
+  const raw = String(execution.context.previewExpiresAt || execution.expiresAt || '');
+  const parsed = Date.parse(raw);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function leaveStatusNarration(result: JsonObject) {
+  const requestRecord = result.request as JsonObject | undefined;
+  const statusCode = String(requestRecord?.status ?? '');
+  const statusLabel = String(requestRecord?.statusLabel ?? statusCode);
+  const decisionSummary = String(requestRecord?.decisionSummary ?? '');
+  const failedRules = Array.isArray(requestRecord?.failedRules)
+    ? (requestRecord?.failedRules as JsonObject[])
+    : [];
+  const failedRuleText = failedRules
+    .map((item) => `${String(item.ruleName ?? item.ruleCode ?? '')}（${String(item.ruleCode ?? '')}）`)
+    .filter(Boolean)
+    .join('、');
+  const statusEvidence = `审批状态：${statusLabel}${
+    statusCode === 'approved_auto' && decisionSummary
+      ? ` · ${decisionSummary}`
+      : failedRuleText
+        ? ` · 未通过：${failedRuleText}`
+        : ''
+  }`;
+  const statusReplyByCode: Record<string, string> = {
+    approved_auto: `当前状态：已自动批准，${decisionSummary || '全部低风险规则通过'}。`,
+    manual_review: `当前状态：待人工复核，${failedRuleText ? `未通过规则：${failedRuleText}。` : ''}申请已转人工复核，管理员处理后可在助手中查询结果；系统不会自动驳回。`,
+    approved_manual: `当前状态：已人工批准${decisionSummary ? `（${decisionSummary}）` : ''}。`,
+    rejected_manual: `当前状态：已人工驳回${decisionSummary ? `（${decisionSummary}）` : ''}。如需再次申请，请调整信息后重新提交一条新申请。`,
+    cancelled: '当前状态：已撤回。该申请此前已由学生撤回，本次未创建新的申请。',
+    evaluating: '当前状态：审批中，请稍后查询结果。',
+  };
+  return {
+    statusCode,
+    statusLabel,
+    statusEvidence,
+    failedRuleText,
+    statusReply: statusReplyByCode[statusCode] ?? `当前状态：${statusLabel}。`,
+  };
+}
+
+interface LeaveConversationOutcome {
+  reply: string;
+  cards: CampusResultCard[];
+  execution: ExecutionState;
+}
+
+const inFlightLeaveSubmissions = new Map<
+  string,
+  Promise<LeaveConversationOutcome>
+>();
+
+async function submitConfirmedLeave(params: {
+  execution: ExecutionState;
+  principal: CampusPrincipal;
+  sessionId: string;
+  trace: RequestTraceContext;
+  requestId: string;
+}): Promise<LeaveConversationOutcome> {
+  const existing = inFlightLeaveSubmissions.get(params.execution.executionId);
+  if (existing) {
+    const first = await existing;
+    return replayConfirmedLeave({
+      execution: first.execution,
+      principal: params.principal,
+      trace: params.trace,
+      replayed: true,
+    });
+  }
+  const pending = performConfirmedLeaveSubmission(params);
+  inFlightLeaveSubmissions.set(params.execution.executionId, pending);
+  try {
+    return await pending;
+  } finally {
+    if (inFlightLeaveSubmissions.get(params.execution.executionId) === pending) {
+      inFlightLeaveSubmissions.delete(params.execution.executionId);
+    }
+  }
+}
+
+/**
+ * 确认后的确定性提交：只依赖结构化预览和确定性 Skill，不再进行任何
+ * 自由模型推理。执行 ID 派生的幂等键保证重复确认只产生一条请假。
+ */
+async function performConfirmedLeaveSubmission(params: {
+  execution: ExecutionState;
+  principal: CampusPrincipal;
+  sessionId: string;
+  trace: RequestTraceContext;
+  requestId: string;
+}): Promise<LeaveConversationOutcome> {
+  const { execution, principal, sessionId, trace, requestId } = params;
+  const ownerHash = executionOwner(principal);
+  const context = execution.context;
+  if (!context.leaveType || !context.start || !context.end || !context.reason) {
+    throw new CampusHttpError(409, 'PREVIEW_INCOMPLETE', '请假预览信息不完整，不能提交');
+  }
+  const reasonText = String(context.reason).trim();
+  if (reasonText.length < 4 || reasonText.length > 200) {
+    throw new CampusHttpError(409, 'PREVIEW_INCOMPLETE', '请假原因需要在 4 到 200 个字符之间，请补充后重新确认');
+  }
+  if (previewDeadline(execution) <= Date.now()) {
+    await executionStateStore.transition(execution.executionId, {
+      status: 'collecting',
+      phase: 'collecting-parameters',
+      summary: '请假预览已过期，等待重新生成',
+      context: { ...context, previewHash: '' },
+    });
+    throw new CampusHttpError(410, 'PREVIEW_EXPIRED', '请假预览已过期，请重新发送请假信息生成新的预览');
+  }
+  const snapshot = leavePreviewSnapshot(context);
+  const previewHash = sha256(canonicalJson(snapshot));
+  if (!context.previewHash || context.previewHash !== previewHash) {
+    throw new CampusHttpError(409, 'PREVIEW_CHANGED', '请假预览已经变化，请重新查看完整摘要并再次确认');
+  }
+  const conflicting = (await executionStateStore.listBySession(ownerHash, sessionId)).filter(
+    (candidate) =>
+      candidate.executionId !== execution.executionId &&
+      candidate.status === 'awaiting-confirmation' &&
+      isLeaveCapability(candidate.capabilityId),
+  );
+  if (conflicting.length) {
+    throw new CampusHttpError(409, 'MULTIPLE_PENDING_PREVIEWS', '当前会话存在多个待确认请假预览，请先取消多余预览后再提交');
+  }
+  await appendTrace(trace, {
+    event: 'execution.state',
+    label: '校验预览哈希与有效期：通过',
+    executionId: execution.executionId,
+    phase: 'confirm',
+    status: 'awaiting-confirmation',
+    outcome: 'succeeded',
+  });
+  let submitting: ExecutionState;
+  let committedResultRef = '';
+  try {
+    submitting = await executionStateStore.transition(execution.executionId, {
+      status: 'submitting',
+      phase: 'submitting',
+      summary: '状态机识别明确确认，正在提交请假',
+      expectedStatus: 'awaiting-confirmation',
+    });
+  } catch (error) {
+    if (error instanceof CampusHttpError && error.code === 'EXECUTION_STATE_CONFLICT') {
+      const latest = await executionStateStore.find(execution.executionId);
+      if (latest?.status === 'succeeded' && latest.resultRef) {
+        return replayConfirmedLeave({ execution: latest, principal, trace, replayed: true });
+      }
+      if (latest?.status === 'submitting') return inFlightLeaveReply(latest, trace);
+    }
+    throw error;
+  }
+  try {
+    const createArgs = [
+      '--student-id', principal.studentId,
+      '--student-name', principal.studentName,
+      '--college', principal.college,
+      '--class-name', principal.className,
+      '--leave-type', snapshot.leaveType,
+      '--start', snapshot.start,
+      '--end', snapshot.end,
+      '--reason', snapshot.reason,
+    ];
+    const leaveIdempotencyKey = `confirm:${execution.executionId}`;
+    let result = await tracedTool(
+      trace,
+      'campus-leave',
+      '明确确认后提交请假',
+      () => runLeaveEngine('create', createArgs, leaveIdempotencyKey, requestId),
+      submitting.executionId,
+    );
+    const resultRef = String((result.request as JsonObject | undefined)?.id || '');
+    if (!resultRef) throw new Error('请假引擎未返回申请编号');
+    committedResultRef = resultRef;
+
+    let approvalPending = false;
+    if (String((result.request as JsonObject | undefined)?.status || '') === 'evaluating') {
+      try {
+        const approvalResult = await tracedTool(
+          trace,
+          'campus-admin-agent',
+          '通知独立管理员 Agent 执行自动批复 Skill',
+          () => processWithCampusAdminAgent(resultRef),
+          submitting.executionId,
+        );
+        const approvedRequest = approvalResult.request as JsonObject | undefined;
+        if (!approvedRequest) throw new Error('管理员 Agent 未返回审批结果');
+        result = { ...result, request: approvedRequest };
+        const narration = leaveStatusNarration(result);
+        await appendTrace(trace, {
+          event: 'execution.state',
+          label: `管理员审批 Skill 完成：${narration.statusLabel}`,
+          executionId: submitting.executionId,
+          phase: 'approving',
+          status: String(approvedRequest.status || ''),
+          outcome: 'succeeded',
+        });
+      } catch (error) {
+        approvalPending = true;
+        await appendTrace(trace, {
+          event: 'execution.state',
+          label: '请假已入库，管理员审批链路待后台任务恢复',
+          executionId: submitting.executionId,
+          phase: 'approval-pending',
+          status: 'evaluating',
+          outcome: 'failed',
+          errorCode: error instanceof CampusHttpError ? error.code : 'ADMIN_APPROVAL_PENDING',
+        });
+      }
+    }
+
+    let replayVerified = false;
+    try {
+      const replayResult = await tracedTool(
+        trace,
+        'campus-leave',
+        '使用同一幂等键重放请假提交',
+        () =>
+          runLeaveEngine(
+            'create',
+            createArgs,
+            leaveIdempotencyKey,
+            `${requestId}:replay`,
+          ),
+        submitting.executionId,
+      );
+      const replayRecord = replayResult.request as JsonObject | undefined;
+      replayVerified =
+        Boolean(replayResult.idempotent) &&
+        String(replayRecord?.id || '') === resultRef;
+    } catch {
+      replayVerified = false;
+    }
+
+    let auditOk = false;
+    let auditEvents = 0;
+    let auditIssues = 0;
+    try {
+      const auditResult = await tracedTool(
+        trace,
+        'campus-leave',
+        '校验请假审计哈希链',
+        () =>
+          runLeaveEngine(
+            'verify-audit',
+            [],
+            leaveIdempotencyKey,
+            `${requestId}:audit`,
+          ),
+        submitting.executionId,
+      );
+      auditOk = Boolean(auditResult.ok);
+      auditEvents = Number(auditResult.events || 0);
+      auditIssues = Array.isArray(auditResult.issues) ? auditResult.issues.length : 0;
+    } catch {
+      auditOk = false;
+    }
+
+    const narration = leaveStatusNarration(result);
+    const duplicateHit = Boolean(result.duplicate);
+    const completed = await executionStateStore.transition(submitting.executionId, {
+      status: 'succeeded',
+      phase: approvalPending ? 'approval-pending' : 'completed',
+      summary:
+        approvalPending
+          ? '请假已提交，管理员审批链路待恢复'
+          : replayVerified && auditOk
+          ? `请假已提交：${narration.statusLabel}，幂等重放与审计校验通过`
+          : `请假已提交：${narration.statusLabel}，可靠性证据需要复核`,
+      resultRef,
+      expectedStatus: 'submitting',
+    });
+    const resultCard = actionResultCard(completed);
+    resultCard.summary = `请假已提交：${narration.statusLabel}`;
+    resultCard.evidence = [
+      `首次提交：${narration.statusCode || 'pending'} · 幂等命中 ${duplicateHit}`,
+      narration.statusEvidence,
+      `同键重放：${replayVerified} · 返回同一申请：${replayVerified}`,
+      `审计校验：ok=${auditOk} · ${auditEvents} 个事件 · ${auditIssues} 个问题`,
+    ];
+    const duplicateNote = duplicateHit
+      ? narration.statusCode === 'cancelled'
+        ? '相同内容的申请已存在。'
+        : '相同内容的申请已存在，未重复创建，以下为该申请的当前状态。'
+      : '';
+    return {
+      reply:
+        approvalPending
+          ? `请假已提交。申请编号：${resultRef}。当前审批任务正在恢复，可稍后查询结果；请勿重复发起请假。`
+          : `请假已提交，并由独立管理员 Agent 完成自动批复。申请编号：${resultRef}。${duplicateNote}${narration.statusReply}` +
+            (replayVerified && auditOk
+              ? '同键重放返回同一申请，审计链校验通过。'
+              : '可靠性证据未完全通过，请联系演示管理员复核。'),
+      cards: [resultCard],
+      execution: completed,
+    };
+  } catch (error) {
+    await executionStateStore.transition(submitting.executionId, {
+      status: 'failed',
+      phase: 'submit-failed',
+      summary: committedResultRef
+        ? `请假 ${committedResultRef} 已入库，但执行状态保存失败，请查询申请记录`
+        : '请假提交结果未能确认，请先查询记录再决定是否重试',
+      resultRef: committedResultRef || undefined,
+      errorCode: 'LEAVE_SUBMIT_FAILED',
+    });
+    throw error;
+  }
+}
+
+async function replayConfirmedLeave(params: {
+  execution: ExecutionState;
+  principal: CampusPrincipal;
+  trace: RequestTraceContext;
+  replayed?: boolean;
+}): Promise<LeaveConversationOutcome> {
+  const { execution, principal, trace } = params;
+  const result = await tracedTool(
+    trace,
+    'campus-leave',
+    '重复确认：读取首次提交结果',
+    () =>
+      runLeaveEngine(
+        'list',
+        ['--student-id', principal.studentId, '--limit', '100'],
+        `replay:${execution.executionId}`,
+        `replay:${execution.executionId}`,
+      ),
+    execution.executionId,
+  );
+  const record = (Array.isArray(result.requests) ? result.requests : [])
+    .filter((item): item is JsonObject => Boolean(item) && typeof item === 'object')
+    .find((item) => String(item.id) === execution.resultRef);
+  if (!record) {
+    throw new CampusHttpError(409, 'REPLAY_RESULT_MISSING', '首次提交的请假记录已不可用，请重新发起请假');
+  }
+  const narration = leaveStatusNarration({ request: record });
+  const resultCard = actionResultCard(execution);
+  resultCard.summary = `幂等重放：返回首次提交结果（${narration.statusLabel}）`;
+  resultCard.evidence = [
+    '重复确认按幂等重放处理，未创建新的请假',
+    `申请编号：${execution.resultRef}`,
+    narration.statusEvidence,
+  ];
+  return {
+    reply:
+      `该请假此前已提交，本次确认标记为幂等重放，没有创建新的申请。申请编号：${execution.resultRef}。${narration.statusReply}`,
+    cards: [resultCard],
+    execution,
+  };
+}
+
+function inFlightLeaveReply(
+  execution: ExecutionState,
+  trace: RequestTraceContext,
+): LeaveConversationOutcome {
+  void trace;
+  const resultCard = actionResultCard(execution);
+  resultCard.summary = '上一次确认正在提交请假';
+  resultCard.evidence = ['重复确认已被状态机拦截，等待首次提交完成后自动复用结果'];
+  return {
+    reply: '上一次确认正在提交请假，请稍候在助手中查询结果，无需重复确认。',
+    cards: [resultCard],
+    execution,
+  };
+}
+
+async function cancelLeavePreviewExecution(
+  execution: ExecutionState,
+  trace: RequestTraceContext,
+  origin: 'confirm-fast-path' | 'execution-action',
+): Promise<LeaveConversationOutcome> {
+  void trace;
+  const cancelled = await executionStateStore.transition(execution.executionId, {
+    status: 'cancelled',
+    phase: 'cancelled',
+    summary: '用户取消请假预览，没有提交请假',
+    expectedStatus: 'awaiting-confirmation',
+  });
+  void origin;
+  return {
+    reply: '已取消当前请假预览，没有提交任何请假。需要时可以重新发起请假。',
+    cards: [],
+    execution: cancelled,
+  };
+}
+
+function upgradeCardActions(
+  cards: CampusResultCard[],
+  executionId: string,
+  previewHash: string,
+): CampusResultCard[] {
+  if (!previewHash) return cards;
+  return cards.map((card) => {
+    if (card.type !== 'orchestration-summary') return card;
+    return {
+      ...card,
+      actions: card.actions.map((action) => {
+        if (action.kind !== 'send-message') return action;
+        if (action.message === '确认提交') {
+          return {
+            kind: 'execution-action',
+            action: 'confirm',
+            label: action.label,
+            executionId,
+            previewHash,
+          };
+        }
+        if (action.message === '取消') {
+          return {
+            kind: 'execution-action',
+            action: 'cancel',
+            label: action.label,
+            executionId,
+            previewHash,
+          };
+        }
+        return action;
+      }),
+    };
+  });
+}
+
+async function handleLeaveRecordList(
+  principal: CampusPrincipal,
+  sessionId: string,
+  capabilityId: 'campus.leave',
+): Promise<LeaveConversationOutcome> {
+  const capability = listCapabilities(principal).find(
+    (item) => item.id === capabilityId,
+  );
+  if (!capability) throw new CampusHttpError(403, 'CAPABILITY_DENIED', '当前身份不能查询请假 Demo');
+  const requests = (await listLeaveRequests(principal)) as Array<Record<string, unknown>>;
+  const reply = !requests.length
+    ? '当前没有请假记录。'
+    : [
+        '最近的请假记录：',
+        ...requests
+          .slice(-5)
+          .reverse()
+          .map(
+            (item) =>
+              `- ${String(item.id)}｜${String(item.leaveTypeLabel || item.leaveType || '')}｜${String(
+                item.start || '',
+              )} 至 ${String(item.end || '')}｜${String(item.statusLabel || item.status || '')}`,
+          ),
+      ].join('\n');
+  const execution = await executionStateStore.start(
+    executionOwner(principal),
+    sessionId,
+    capability,
+    { status: 'succeeded', phase: 'read-completed', summary: '已读取请假 Demo 记录' },
+  );
+  return { reply, cards: [], execution };
+}
+
+async function handleLeaveOrchestration(
   message: string,
   sessionId: string,
   principal: CampusPrincipal,
-  idempotencyKey: string,
   requestId: string,
   trace: RequestTraceContext,
   currentExecution: ExecutionState | null,
   decision: OpenClawRouteDecision,
+  capabilityId: 'campus.leave' | 'campus.leave-impact',
 ) {
   const capability = listCapabilities(principal).find(
-    (item) => item.id === 'campus.leave-impact',
+    (item) => item.id === capabilityId,
   );
   if (!capability) return null;
-  const confirmed =
-    decision.intent === 'confirm' &&
-    /^(确认|确认提交|同意提交|按这个方案提交)[。！!]?$/u.test(message.trim());
-  if (
-    confirmed &&
-    currentExecution?.capabilityId === capability.id &&
-    currentExecution.status === 'awaiting-confirmation'
-  ) {
-    const leaveCapability = listCapabilities(principal).find(
-      (item) => item.id === 'campus.leave',
-    );
-    if (!leaveCapability) throw new CampusHttpError(403, 'CAPABILITY_DENIED', '当前身份不能提交请假 Demo');
-    const context = currentExecution.context;
-    if (!context.leaveType || !context.start || !context.end || !context.reason) {
-      throw new CampusHttpError(409, 'PREVIEW_INCOMPLETE', '请假预览信息不完整，不能提交');
-    }
-    if (String(context.reason).trim().length < 4 || String(context.reason).trim().length > 200) {
-      throw new CampusHttpError(409, 'PREVIEW_INCOMPLETE', '请假原因需要在 4 到 200 个字符之间，请补充后重新确认');
-    }
-    const previewSnapshot = {
-      targetDate: String(context.targetDate || ''),
-      leaveType: String(context.leaveType),
-      start: String(context.start),
-      end: String(context.end),
-      reason: String(context.reason).trim(),
-    };
-    const previewHash = sha256(canonicalJson(previewSnapshot));
-    if (!context.previewHash || context.previewHash !== previewHash) {
-      throw new CampusHttpError(409, 'PREVIEW_CHANGED', '请假预览已经变化，请重新查看完整摘要并再次确认');
-    }
-    await executionStateStore.transition(currentExecution.executionId, {
-      status: 'succeeded',
-      phase: 'handed-off',
-      summary: '多 Skill 预览已确认，移交请假能力执行',
-    });
-    let leaveExecution = await executionStateStore.start(
-      executionOwner(principal),
-      sessionId,
-      leaveCapability,
-      { status: 'executing', phase: 'submitting', summary: '已确认，正在执行请假 Demo' },
-    );
-    try {
-      const result = await tracedTool(
-        trace,
-        'campus-leave',
-        '明确确认后提交请假 Demo',
-        () =>
-          runLeaveEngine(
-            'create',
-            [
-              '--student-id', principal.studentId,
-              '--student-name', principal.studentName,
-              '--college', principal.college,
-              '--class-name', principal.className,
-              '--leave-type', previewSnapshot.leaveType,
-              '--start', previewSnapshot.start,
-              '--end', previewSnapshot.end,
-              '--reason', previewSnapshot.reason,
-            ],
-            idempotencyKey,
-            requestId,
-          ),
-        leaveExecution.executionId,
-      );
-      const requestRecord = result.request as JsonObject | undefined;
-      const resultRef = String(requestRecord?.id || '');
-      if (!resultRef) throw new Error('请假引擎未返回申请编号');
-      leaveExecution = await executionStateStore.transition(leaveExecution.executionId, {
-        status: 'succeeded',
-        phase: 'completed',
-        summary: '请假 Demo 已提交并保留证据',
-        resultRef,
-      });
-      return {
-        reply: `请假 Demo 已提交。申请编号：${resultRef}。课程影响分析仅供演示参考。`,
-        cards: [],
-        execution: leaveExecution,
-      };
-    } catch (error) {
-      await executionStateStore.transition(leaveExecution.executionId, {
-        status: 'failed',
-        phase: 'submit-failed',
-        summary: '请假 Demo 提交失败，未确认产生有效申请',
-        errorCode: 'LEAVE_SUBMIT_FAILED',
-      });
-      throw error;
-    }
-  }
-  if (
-    decision.intent === 'cancel' &&
-    currentExecution?.capabilityId === capability.id &&
-    isActiveExecution(currentExecution)
-  ) {
-    const cancelled = await executionStateStore.transition(currentExecution.executionId, {
+  const active =
+    currentExecution?.capabilityId === capability.id && isActiveExecution(currentExecution)
+      ? currentExecution
+      : null;
+  if (decision.intent === 'cancel' && active) {
+    const cancelled = await executionStateStore.transition(active.executionId, {
       status: 'cancelled',
       phase: 'cancelled',
-      summary: '用户取消组合预览，没有提交请假',
+      summary: '用户取消请假预览，没有提交请假',
     });
     return {
-      reply: '已取消当前请假与课程影响预览，没有提交任何请假。',
+      reply: '已取消当前请假预览，没有提交任何请假。',
       cards: [],
       execution: cancelled,
     };
   }
+  if (capabilityId === 'campus.leave' && decision.intent === 'list') {
+    return handleLeaveRecordList(principal, sessionId, 'campus.leave');
+  }
   const execution =
-    currentExecution?.capabilityId === capability.id &&
-    isActiveExecution(currentExecution)
-      ? await executionStateStore.transition(currentExecution.executionId, {
+    active
+      ? await executionStateStore.transition(active.executionId, {
           status: 'executing',
           phase: 'orchestrating',
-          summary: '正在更新课程影响与请假预览',
+          summary:
+            capabilityId === 'campus.leave-impact'
+              ? '正在更新课程影响与请假预览'
+              : '正在更新请假预览',
         })
       : await executionStateStore.start(
           executionOwner(principal),
           sessionId,
           capability,
-          { status: 'executing', phase: 'orchestrating', summary: '正在组合课程查询与请假预览' },
+          {
+            status: 'executing',
+            phase: 'orchestrating',
+            summary:
+              capabilityId === 'campus.leave-impact'
+                ? '正在组合课程查询与请假预览'
+                : '正在生成请假预览',
+          },
         );
   try {
     const targetDate = decision.parameters.targetDate || String(execution.context.targetDate || '');
-    const impacts = await tracedTool(
-      trace,
-      'campus-course',
-      '查询请假日期的 Demo 课程影响',
-      () => courseImpactsForLeave(principal, targetDate, message, decision.parameters),
-      execution.executionId,
-    );
+    const impacts =
+      capabilityId === 'campus.leave-impact'
+        ? await tracedTool(
+            trace,
+            'campus-course',
+            '查询请假日期的 Demo 课程影响',
+            () => courseImpactsForLeave(principal, targetDate, message, decision.parameters),
+            execution.executionId,
+          )
+        : [];
     const leavePreview = await tracedTool(
       trace,
       'campus-leave',
@@ -1130,12 +1533,17 @@ async function handleLeaveImpactOrchestration(
       contract: 'campus-skill-input@1',
       invocationId: `INV-${crypto.randomUUID()}`,
       requestId,
-      capabilityId: capability.id,
+      capabilityId: 'campus.leave-impact',
       operation: 'compose-preview',
       actor: { subject: executionOwner(principal), roles: principal.roles },
       session: { id: sessionId, now: new Date().toISOString() },
       authorization: { confirmed: false },
-      arguments: { targetDate, courseImpacts: impacts, leavePreview },
+      arguments: {
+        targetDate,
+        courseImpacts: impacts,
+        leavePreview,
+        mode: capabilityId === 'campus.leave' ? 'leave-only' : 'impact',
+      },
     };
     const output = await tracedTool(
       trace,
@@ -1144,6 +1552,7 @@ async function handleLeaveImpactOrchestration(
       () => runJsonStdioSkill(LEAVE_IMPACT_ROOT, manifest, input),
       execution.executionId,
     );
+    const complete = output.state === 'awaiting-confirmation';
     const previewSnapshot = {
       targetDate,
       leaveType: leavePreview.leaveType,
@@ -1151,26 +1560,44 @@ async function handleLeaveImpactOrchestration(
       end: leavePreview.end,
       reason: leavePreview.reason,
     };
+    const previewHash = complete ? sha256(canonicalJson(previewSnapshot)) : '';
     const finalExecution = await executionStateStore.transition(execution.executionId, {
-      status: output.state === 'awaiting-confirmation' ? 'awaiting-confirmation' : 'collecting',
-      phase: output.state === 'awaiting-confirmation' ? 'confirm' : 'collecting-parameters',
-      summary:
-        output.state === 'awaiting-confirmation'
-          ? '多 Skill 预览已生成，尚未提交请假'
-          : '课程影响已查询，等待补充请假信息',
-      context: {
-        targetDate,
-        leaveType: leavePreview.leaveType,
-        start: leavePreview.start,
-        end: leavePreview.end,
-        reasonProvided: leavePreview.reasonProvided,
-        reason: leavePreview.reason,
-        previewHash: output.state === 'awaiting-confirmation'
-          ? sha256(canonicalJson(previewSnapshot))
-          : '',
-      },
+      status: complete ? 'awaiting-confirmation' : 'collecting',
+      phase: complete ? 'confirm' : 'collecting-parameters',
+      summary: complete
+        ? '请假预览已生成，尚未提交请假'
+        : '请假信息尚未收集完整，等待补充',
+      context: complete
+        ? {
+            studentNo: principal.studentId,
+            studentName: principal.studentName,
+            college: principal.college,
+            className: principal.className,
+            targetDate,
+            leaveType: leavePreview.leaveType,
+            start: leavePreview.start,
+            end: leavePreview.end,
+            reasonProvided: leavePreview.reasonProvided,
+            reason: leavePreview.reason,
+            previewHash,
+            previewExpiresAt: new Date(Date.now() + PREVIEW_TTL_MS).toISOString(),
+          }
+        : {
+            targetDate,
+            leaveType: leavePreview.leaveType,
+            start: leavePreview.start,
+            end: leavePreview.end,
+            reasonProvided: leavePreview.reasonProvided,
+            reason: leavePreview.reason,
+            previewHash: '',
+          },
     });
-    return { reply: output.message, cards: output.cards || [], execution: finalExecution };
+    const cards = upgradeCardActions(
+      output.cards || [],
+      finalExecution.executionId,
+      previewHash,
+    );
+    return { reply: output.message, cards, execution: finalExecution };
   } catch (error) {
     await executionStateStore.transition(execution.executionId, {
       status: 'failed',
@@ -1252,6 +1679,86 @@ async function findTeacherSelection(message: string) {
     courseName: String(section.courseName),
     teacherName: String(teacher?.name || ''),
   };
+}
+
+async function submitConfirmedCourse(
+  state: ExecutionState,
+  principal: CampusPrincipal,
+  idempotencyKey: string,
+  requestId: string,
+  trace: RequestTraceContext,
+) {
+  const planToken = String(state.context.planToken || '');
+  if (!planToken) {
+    throw new CampusHttpError(409, 'PLAN_TOKEN_MISSING', '选课方案已失效，请重新生成方案后再确认');
+  }
+  let submitting: ExecutionState;
+  try {
+    submitting = await executionStateStore.transition(state.executionId, {
+      status: 'submitting',
+      phase: 'submitting',
+      summary: '已确认，正在执行选课 Demo 工具',
+      expectedStatus: 'awaiting-confirmation',
+    });
+  } catch (error) {
+    if (error instanceof CampusHttpError && error.code === 'EXECUTION_STATE_CONFLICT') {
+      const latest = await executionStateStore.find(state.executionId);
+      if (latest?.status === 'succeeded') {
+        return {
+          reply: '该选课方案此前已提交，本次确认按幂等重放处理，没有重复提交。',
+          execution: latest,
+        };
+      }
+      if (latest?.status === 'submitting') {
+        return {
+          reply: '上一次确认正在提交选课，请稍候查询结果，无需重复确认。',
+          execution: latest,
+        };
+      }
+    }
+    throw error;
+  }
+  let result: JsonObject;
+  try {
+    result = await tracedTool(
+      trace,
+      'campus-course',
+      '复核并提交选课 Demo',
+      () =>
+        runCourseEngine(
+          'submit',
+          [
+            '--student-id',
+            principal.studentId,
+            '--plan-token',
+            planToken,
+          ],
+          idempotencyKey,
+          requestId,
+        ),
+      submitting.executionId,
+    );
+  } catch (error) {
+    await executionStateStore.transition(submitting.executionId, {
+      status: 'failed',
+      phase: isTimeoutError(error) ? 'timed-out' : 'failed',
+      summary: '选课 Demo 执行失败，未确认成功结果',
+      errorCode: isTimeoutError(error) ? 'COURSE_ENGINE_TIMEOUT' : 'COURSE_EXECUTION_FAILED',
+    });
+    throw error;
+  }
+  const submission =
+    result.submission && typeof result.submission === 'object'
+      ? (result.submission as JsonObject)
+      : {};
+  const completed = await executionStateStore.transition(submitting.executionId, {
+    status: 'succeeded',
+    phase: 'completed',
+    summary: '选课 Demo 已执行并保留证据',
+    resultRef: String(submission.submissionId || ''),
+    expectedStatus: 'submitting',
+  });
+  return { reply: submitReply(result), execution: completed };
 }
 
 async function handleCourseConversation(
@@ -1356,58 +1863,12 @@ async function handleCourseConversation(
     /^(确认|确认提交|同意|同意提交|提交|按这个方案提交|可以提交)[。！!]?$/u.test(
       message.trim(),
     );
-  const planToken = String(state?.context.planToken || '');
   if (
     state?.status === 'awaiting-confirmation' &&
     state.phase === 'confirm' &&
-    planToken &&
     isConfirmation
   ) {
-    state = await executionStateStore.transition(state.executionId, {
-      status: 'executing',
-      phase: 'submitting',
-      summary: '已确认，正在执行选课 Demo 工具',
-    });
-    let result: JsonObject;
-    try {
-      result = await tracedTool(
-        trace,
-        'campus-course',
-        '复核并提交选课 Demo',
-        () =>
-          runCourseEngine(
-            'submit',
-            [
-              '--student-id',
-              principal.studentId,
-              '--plan-token',
-              planToken,
-            ],
-            idempotencyKey,
-            requestId,
-          ),
-        state.executionId,
-      );
-    } catch (error) {
-      await executionStateStore.transition(state.executionId, {
-        status: 'failed',
-        phase: isTimeoutError(error) ? 'timed-out' : 'failed',
-        summary: '选课 Demo 执行失败，未确认成功结果',
-        errorCode: isTimeoutError(error) ? 'COURSE_ENGINE_TIMEOUT' : 'COURSE_EXECUTION_FAILED',
-      });
-      throw error;
-    }
-    const submission =
-      result.submission && typeof result.submission === 'object'
-        ? (result.submission as JsonObject)
-        : {};
-    state = await executionStateStore.transition(state.executionId, {
-      status: 'succeeded',
-      phase: 'completed',
-      summary: '选课 Demo 已执行并保留证据',
-      resultRef: String(submission.submissionId || ''),
-    });
-    return { reply: submitReply(result), execution: state };
+    return await submitConfirmedCourse(state, principal, idempotencyKey, requestId, trace);
   }
   if (state && decision.intent === 'cancel') {
     state = await executionStateStore.transition(state.executionId, {
@@ -1512,6 +1973,120 @@ function isActiveExecution(state: ExecutionState | null) {
   );
 }
 
+/**
+ * 纯确认/纯取消表达的本地状态机：在调用 Router 之前处理，模型排队或
+ * 超时都不能阻塞“确认提交”。只有锚定的纯表达会进入该通道；带参数修改
+ * 的复合句（“确认，但时间改到下午五点”）仍需走完整理解管线。
+ */
+async function tryConfirmationFastPath(params: {
+  message: string;
+  sessionId: string;
+  principal: CampusPrincipal;
+  currentExecution: ExecutionState | null;
+  trace: RequestTraceContext;
+  requestId: string;
+  idempotencyKey: string;
+}): Promise<LeaveConversationOutcome | null> {
+  const { message, principal, currentExecution, trace, requestId, idempotencyKey } = params;
+  const kind = classifyPureConfirmation(message);
+  if (!kind || !currentExecution) return null;
+  const execution = currentExecution;
+  const awaitingConfirm =
+    execution.status === 'awaiting-confirmation' && execution.phase === 'confirm';
+
+  if (isLeaveCapability(execution.capabilityId)) {
+    if (kind === 'cancel' && awaitingConfirm) {
+      await appendTrace(trace, {
+        event: 'capability.routed',
+        label: '检测到当前待确认执行：本地状态机识别明确取消，绕过意图路由',
+        capabilityId: execution.capabilityId,
+        executionId: execution.executionId,
+        routeSource: 'confirm-fast-path',
+        outcome: 'succeeded',
+      });
+      return cancelLeavePreviewExecution(execution, trace, 'confirm-fast-path');
+    }
+    if (kind === 'confirm') {
+      if (awaitingConfirm) {
+        await appendTrace(trace, {
+          event: 'capability.routed',
+          label: '检测到当前待确认执行：本地状态机识别明确确认，绕过意图路由',
+          capabilityId: execution.capabilityId,
+          executionId: execution.executionId,
+          routeSource: 'confirm-fast-path',
+          outcome: 'succeeded',
+        });
+        return submitConfirmedLeave({
+          execution,
+          principal,
+          sessionId: params.sessionId,
+          trace,
+          requestId,
+        });
+      }
+      if (execution.status === 'succeeded' && execution.resultRef) {
+        await appendTrace(trace, {
+          event: 'capability.routed',
+          label: '检测到已提交执行：重复确认按幂等重放处理，绕过意图路由',
+          capabilityId: execution.capabilityId,
+          executionId: execution.executionId,
+          routeSource: 'confirm-fast-path',
+          outcome: 'succeeded',
+        });
+        return replayConfirmedLeave({ execution, principal, trace, replayed: true });
+      }
+      if (
+        execution.status === 'submitting' ||
+        (execution.status === 'executing' && execution.phase === 'submitting')
+      ) {
+        await appendTrace(trace, {
+          event: 'capability.routed',
+          label: '检测到正在提交的执行：重复确认被状态机拦截',
+          capabilityId: execution.capabilityId,
+          executionId: execution.executionId,
+          routeSource: 'confirm-fast-path',
+          outcome: 'succeeded',
+        });
+        return inFlightLeaveReply(execution, trace);
+      }
+    }
+    return null;
+  }
+
+  if (execution.capabilityId === 'campus.course' && awaitingConfirm) {
+    await appendTrace(trace, {
+      event: 'capability.routed',
+      label: `检测到当前待确认执行：本地状态机识别明确${kind === 'confirm' ? '确认' : '取消'}，绕过意图路由`,
+      capabilityId: execution.capabilityId,
+      executionId: execution.executionId,
+      routeSource: 'confirm-fast-path',
+      outcome: 'succeeded',
+    });
+    if (kind === 'cancel') {
+      const cancelled = await executionStateStore.transition(execution.executionId, {
+        status: 'cancelled',
+        phase: 'cancelled',
+        summary: '用户取消，未执行写入',
+        expectedStatus: 'awaiting-confirmation',
+      });
+      return {
+        reply: '已取消当前待确认选课方案，没有提交任何课程。需要时可以重新发起智能选课。',
+        cards: [],
+        execution: cancelled,
+      };
+    }
+    const outcome = await submitConfirmedCourse(
+      execution,
+      principal,
+      idempotencyKey,
+      requestId,
+      trace,
+    );
+    return { reply: outcome.reply, cards: [], execution: outcome.execution };
+  }
+  return null;
+}
+
 async function updateGenericExecution(
   execution: ExecutionState,
   reply: string,
@@ -1523,35 +2098,10 @@ async function updateGenericExecution(
       summary: '可信知识检索 Demo 已完成',
     });
   }
-  if (execution.capabilityId !== 'campus.leave') return execution;
-  const requestId = reply.match(/(?:申请编号|请假编号)[：:\s]*([A-Za-z0-9-]+)/u)?.[1];
-  if (/请假申请已提交|请假.*提交成功/u.test(reply)) {
-    return executionStateStore.transition(execution.executionId, {
-      status: 'succeeded',
-      phase: 'completed',
-      summary: '请假 Demo 已执行并保留证据',
-      resultRef: requestId,
-    });
-  }
-  if (/已取消|已撤回|取消成功/u.test(reply)) {
-    return executionStateStore.transition(execution.executionId, {
-      status: 'cancelled',
-      phase: 'cancelled',
-      summary: '请假 Demo 已取消',
-    });
-  }
-  if (/确认提交吗|确认.*提交|是否提交/u.test(reply)) {
-    return executionStateStore.transition(execution.executionId, {
-      status: 'awaiting-confirmation',
-      phase: 'confirm',
-      summary: '请假信息已收集，等待明确确认',
-    });
-  }
-  return executionStateStore.transition(execution.executionId, {
-    status: 'collecting',
-    phase: 'collecting-parameters',
-    summary: '正在补充请假 Demo 参数',
-  });
+  // 请假与选课会话现在由确定性管线与本地确认状态机驱动，这里只处理
+  // 仍经过通用 Agent 的能力（如闲聊与深度检索）。
+  void reply;
+  return execution;
 }
 
 function safeLeaveRequest(item: JsonObject) {
@@ -1568,24 +2118,16 @@ function safeLeaveRequest(item: JsonObject) {
 }
 
 async function listLeaveRequests(principal: CampusPrincipal) {
-  try {
-    const data = JSON.parse(await readFile(LEAVE_DATA_FILE, 'utf8')) as unknown;
-    if (!Array.isArray(data)) return [];
-    return data
-      .filter(
-        (item): item is JsonObject =>
-          Boolean(item) &&
-          typeof item === 'object' &&
-          (item as JsonObject).studentId === principal.studentId,
-      )
-      .sort((a, b) =>
-        String(b.createdAt || '').localeCompare(String(a.createdAt || '')),
-      )
-      .map(safeLeaveRequest);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return [];
-    throw error;
-  }
+  const result = await runCampusService({
+    script: ADMIN_SERVICE_CLI,
+    command: 'student-leave-list',
+    stdinPayload: { studentNo: principal.studentId, limit: 100 },
+    requestId: `leave-list-${Date.now()}`,
+  });
+  const requests = Array.isArray(result.requests) ? result.requests : [];
+  return requests
+    .filter((item): item is JsonObject => Boolean(item) && typeof item === 'object')
+    .map(safeLeaveRequest);
 }
 
 export async function handleCampusAssistantRequest(
@@ -1605,6 +2147,7 @@ export async function handleCampusAssistantRequest(
         let requestHash = '';
         let idempotencyKey = '';
         let executionToFail: ExecutionState | null = null;
+        let executionForResponse: ExecutionState | null = null;
         let requestTrace: RequestTraceContext | null = null;
         try {
           if (
@@ -1818,17 +2361,49 @@ export async function handleCampusAssistantRequest(
               idempotencyKey,
             });
             const scope = `${sha256(principal.studentId).slice(0, 20)}:chat`;
+            const activeTrace = requestTrace;
             const result = await idempotencyStore.run(
               scope,
               idempotencyKey,
               requestHash,
               async () => {
-                const decision = await tracedTool(
-                  requestTrace,
+                const fastPath = await tryConfirmationFastPath({
+                  message,
+                  sessionId,
+                  principal: principal!,
+                  currentExecution,
+                  trace: activeTrace,
+                  requestId,
+                  idempotencyKey,
+                });
+                if (fastPath) {
+                  const fastCapability = availableCapabilities.find(
+                    (capability) => capability.id === fastPath.execution.capabilityId,
+                  );
+                  return {
+                    status: 200,
+                    body: {
+                      reply: fastPath.reply,
+                      sessionId,
+                      selectedCapability: fastCapability
+                        ? {
+                            id: fastCapability.id,
+                            name: fastCapability.name,
+                            skill: fastCapability.skill,
+                            confirmation: fastCapability.execution.confirmation,
+                          }
+                        : null,
+                      execution: publicExecutionState(fastPath.execution),
+                      cards: fastPath.cards,
+                    },
+                  };
+                }
+                const routed = await tracedTool(
+                  activeTrace,
                   'openclaw-router',
-                  'OpenClaw LLM 理解意图并提取参数',
+                  '意图路由器理解请求并提取参数',
                   () =>
-                    routeWithOpenClaw({
+                    routeCampusMessage({
                       message,
                       sessionId,
                       requestId,
@@ -1839,51 +2414,60 @@ export async function handleCampusAssistantRequest(
                       workspace: OPENCLAW_WORKSPACE,
                       timeoutMs: OPENCLAW_ROUTER_TIMEOUT_MS,
                       testFallback: (input) => routeCapability(input, principal!),
+                      fallbackRoute: (input) => routeCapability(input, principal!),
                     }),
                   activeExecution?.executionId,
                 );
+                const decision = routed.decision;
                 const routedCapability = decision.capabilityId && decision.confidence >= 0.6
                   ? availableCapabilities.find(
                       (capability) => capability.id === decision.capabilityId,
                     ) || null
                   : null;
                 // An unfinished execution owns subsequent parameter/confirmation turns.
-                // The LLM may classify a short reply such as “请假原因：去医院看病”
+                // The router may classify a short reply such as “请假原因：去医院看病”
                 // as general chat; never let that escape the existing state machine.
                 const selectedCapability = activeExecution
                   ? availableCapabilities.find(
                       (capability) => capability.id === activeExecution.capabilityId,
                     ) || routedCapability
                   : routedCapability;
-                requestTrace.capabilityId = selectedCapability?.id;
-                await appendTrace(requestTrace, {
+                activeTrace.capabilityId = selectedCapability?.id;
+                const routedSourceLabel: Record<string, string> = {
+                  llm: 'OpenClaw 强模型路由',
+                  'small-model': '小模型路由',
+                  'deterministic-rules': '确定性规则路由',
+                };
+                const routeSource = activeExecution
+                  ? 'active-execution'
+                  : routed.routeSource;
+                await appendTrace(activeTrace, {
                   event: 'capability.routed',
                   label: selectedCapability
-                    ? `OpenClaw LLM 已选择：${selectedCapability.name}`
-                    : 'OpenClaw LLM 判定为通用对话',
+                    ? `${routedSourceLabel[routed.routeSource] || '意图路由'}已选择：${selectedCapability.name}${
+                        routed.degradedReason ? '（模型不可用或低可信，已按确定性规则降级）' : ''
+                      }`
+                    : `${routedSourceLabel[routed.routeSource] || '意图路由'}判定为通用对话`,
                   capabilityId: selectedCapability?.id,
                   executionId: activeExecution?.executionId,
-                  routeSource: activeExecution
-                    ? 'active-execution'
-                    : selectedCapability
-                      ? 'llm'
-                      : 'none',
+                  routeSource,
                   outcome: 'succeeded',
                 });
-                const orchestrationResult =
-                  selectedCapability?.id === 'campus.leave-impact'
-                    ? await handleLeaveImpactOrchestration(
+                const selectedId = selectedCapability?.id || '';
+                const leaveResult =
+                  selectedId === 'campus.leave-impact' || selectedId === 'campus.leave'
+                    ? await handleLeaveOrchestration(
                         message,
                         sessionId,
                         principal!,
-                        idempotencyKey,
                         requestId,
-                        requestTrace,
+                        activeTrace,
                         currentExecution,
                         decision,
+                        selectedId as 'campus.leave' | 'campus.leave-impact',
                       )
                     : null;
-                const courseResult = orchestrationResult ||
+                const courseResult = leaveResult ||
                   selectedCapability?.id !== 'campus.course'
                   ? null
                   : await handleCourseConversation(
@@ -1893,15 +2477,19 @@ export async function handleCampusAssistantRequest(
                     idempotencyKey,
                     requestId,
                     currentExecution,
-                    requestTrace,
+                    activeTrace,
                     decision,
                   );
                 let execution =
-                  orchestrationResult?.execution || courseResult?.execution || null;
-                let rawReply = orchestrationResult?.reply || courseResult?.reply || '';
-                let cards: CampusResultCard[] = orchestrationResult?.cards || [];
-                if (courseResult?.teacherCourseCodes?.length) {
-                  cards = await teacherChoiceCards(courseResult.teacherCourseCodes);
+                  leaveResult?.execution || courseResult?.execution || null;
+                let rawReply = leaveResult?.reply || courseResult?.reply || '';
+                let cards: CampusResultCard[] = leaveResult?.cards || [];
+                const teacherCourseCodes: string[] =
+                  courseResult && 'teacherCourseCodes' in courseResult
+                    ? (courseResult.teacherCourseCodes as string[])
+                    : [];
+                if (teacherCourseCodes.length) {
+                  cards = await teacherChoiceCards(teacherCourseCodes);
                 }
                 if (!rawReply && selectedCapability?.id === 'campus.agentic-search') {
                   execution =
@@ -1919,7 +2507,7 @@ export async function handleCampusAssistantRequest(
                         );
                   executionToFail = execution;
                   const plan = await tracedTool(
-                    requestTrace,
+                    activeTrace,
                     'campus-agentic-search',
                     'OpenClaw 拆解复杂问题并规划本地查询',
                     () => planLocalAgenticSearch({
@@ -1938,7 +2526,7 @@ export async function handleCampusAssistantRequest(
                     'deterministic-fallback': '模型规划不可用，已采用确定性本地检索计划',
                     'deterministic-test': '测试环境采用确定性本地检索计划',
                   }[planningMode];
-                  await appendTrace(requestTrace, {
+                  await appendTrace(activeTrace, {
                     event: 'execution.state',
                     label: planningLabel,
                     executionId: execution.executionId,
@@ -1949,7 +2537,7 @@ export async function handleCampusAssistantRequest(
                   const searchResult = await executeLocalAgenticSearch(
                     plan,
                     async (query) => tracedTool(
-                      requestTrace!,
+                      activeTrace,
                       'campus-knowledge',
                       '仅检索本地校园知识库',
                       () => runKnowledgeEngine(query),
@@ -1989,7 +2577,7 @@ export async function handleCampusAssistantRequest(
                   }
                   if (selectedCapability?.id === 'campus.knowledge') {
                     const knowledge = await tracedTool(
-                      requestTrace,
+                      activeTrace,
                       'campus-knowledge',
                       '检索可信校园知识',
                       () => runKnowledgeEngine(message),
@@ -2000,7 +2588,7 @@ export async function handleCampusAssistantRequest(
                     rawReply = knowledgeReply(knowledge, sourceCards);
                   } else {
                     rawReply = await tracedTool(
-                      requestTrace,
+                      activeTrace,
                       'openclaw-agent',
                       'OpenClaw Agent 推理与技能调用',
                       () =>
@@ -2028,7 +2616,12 @@ export async function handleCampusAssistantRequest(
                     execution = await updateGenericExecution(execution, rawReply);
                   }
                 }
-                if (execution) cards.push(actionResultCard(execution));
+                if (
+                  execution &&
+                  !cards.some((card) => card.type === 'action-result')
+                ) {
+                  cards.push(actionResultCard(execution));
+                }
                 validateResultCards(cards);
                 return {
                   status: 200,
@@ -2090,6 +2683,212 @@ export async function handleCampusAssistantRequest(
               executionId: responseExecution
                 ? String(responseExecution.executionId || '')
                 : undefined,
+              durationMs: Date.now() - startedAt,
+              replayed: result.replayed,
+              outcome: 'succeeded',
+            });
+            sendJson(response, result.status, {
+              ...result.body,
+              traceRequestId: requestId,
+            }, {
+              'x-request-id': requestId,
+              'idempotency-replayed': String(result.replayed),
+            });
+            return;
+          }
+          const executionActionMatch = url.pathname.match(
+            /^\/api\/campus-assistant\/executions\/(EX-[A-Za-z0-9-]+)\/actions$/,
+          );
+          if (request.method === 'POST' && executionActionMatch) {
+            action = 'execution.action';
+            requireAnyRole(principal, ['student', 'campus-operator']);
+            idempotencyKey = idempotencyKeyFor(request, true);
+            const body = await readJsonBody(request);
+            requestHash = sha256(canonicalJson(body));
+            const executionId = executionActionMatch[1];
+            const actionKind = String(body.action || '');
+            const previewHash = String(body.previewHash || '');
+            const sessionId = safeSessionId(body.sessionId);
+            requestTrace = traceContext(requestId, principal, sessionId);
+            await appendTrace(requestTrace, {
+              event: 'request.received',
+              label: '收到确认卡片的结构化动作请求',
+              outcome: 'started',
+            });
+            if (!['confirm', 'cancel'].includes(actionKind)) {
+              throw new CampusHttpError(400, 'INVALID_ACTION', '动作必须是 confirm 或 cancel');
+            }
+            if (!/^[a-f0-9]{64}$/.test(previewHash)) {
+              throw new CampusHttpError(400, 'INVALID_PREVIEW_HASH', '预览哈希不符合协议');
+            }
+            const execution = await executionStateStore.find(executionId);
+            if (!execution) {
+              throw new CampusHttpError(404, 'EXECUTION_NOT_FOUND', '执行不存在或已过期');
+            }
+            executionForResponse = execution;
+            if (execution.ownerHash !== executionOwner(principal)) {
+              throw new CampusHttpError(403, 'EXECUTION_NOT_OWNED', '不能操作其他学生的执行');
+            }
+            if (execution.sessionId !== sessionId) {
+              throw new CampusHttpError(403, 'EXECUTION_SESSION_MISMATCH', '执行不属于当前会话');
+            }
+            if (!isLeaveCapability(execution.capabilityId)) {
+              throw new CampusHttpError(409, 'ACTION_NOT_SUPPORTED', '该执行不支持结构化确认动作');
+            }
+            requestTrace.capabilityId = execution.capabilityId;
+            await auditLedger.append({
+              requestId,
+              principal,
+              action,
+              resource: executionId,
+              outcome: 'attempt',
+              requestHash,
+              idempotencyKey,
+            });
+            const scope = `${sha256(principal.studentId).slice(0, 20)}:execution-action`;
+            const actionTrace = requestTrace;
+            const result = await idempotencyStore.run(
+              scope,
+              idempotencyKey,
+              requestHash,
+              async () => {
+                await appendTrace(actionTrace, {
+                  event: 'capability.routed',
+                  label: `结构化确认动作：${actionKind === 'confirm' ? '确认提交' : '取消'}，绕过意图路由`,
+                  capabilityId: execution.capabilityId,
+                  executionId: execution.executionId,
+                  routeSource: 'execution-action',
+                  outcome: 'succeeded',
+                });
+                const descriptor = listCapabilities(principal!).find(
+                  (item) => item.id === execution.capabilityId,
+                );
+                const respondWith = (outcome: LeaveConversationOutcome) => ({
+                  status: 200,
+                  body: {
+                    reply: outcome.reply,
+                    sessionId,
+                    selectedCapability: descriptor
+                      ? {
+                          id: descriptor.id,
+                          name: descriptor.name,
+                          skill: descriptor.skill,
+                          confirmation: descriptor.execution.confirmation,
+                        }
+                      : null,
+                    execution: publicExecutionState(outcome.execution),
+                    cards: outcome.cards,
+                  },
+                });
+                if (actionKind === 'cancel') {
+                  if (
+                    execution.status !== 'awaiting-confirmation' ||
+                    execution.phase !== 'confirm'
+                  ) {
+                    throw new CampusHttpError(
+                      409,
+                      'EXECUTION_NOT_CONFIRMABLE',
+                      '当前执行不在等待确认状态，不能取消',
+                    );
+                  }
+                  if (String(execution.context.previewHash || '') !== previewHash) {
+                    throw new CampusHttpError(
+                      409,
+                      'PREVIEW_CHANGED',
+                      '请假预览已经变化，请使用最新卡片操作',
+                    );
+                  }
+                  if (previewDeadline(execution) <= Date.now()) {
+                    executionForResponse = await executionStateStore.transition(execution.executionId, {
+                      status: 'collecting',
+                      phase: 'collecting-parameters',
+                      summary: '请假预览已过期，等待重新生成',
+                      context: { ...execution.context, previewHash: '' },
+                      expectedStatus: 'awaiting-confirmation',
+                    });
+                    throw new CampusHttpError(
+                      410,
+                      'PREVIEW_EXPIRED',
+                      '请假预览已过期，请重新发送请假信息生成新的预览',
+                    );
+                  }
+                  return respondWith(
+                    await cancelLeavePreviewExecution(execution, actionTrace, 'execution-action'),
+                  );
+                }
+                if (execution.status === 'awaiting-confirmation' && execution.phase === 'confirm') {
+                  if (String(execution.context.previewHash || '') !== previewHash) {
+                    throw new CampusHttpError(
+                      409,
+                      'PREVIEW_CHANGED',
+                      '请假预览已经变化，请重新查看完整摘要并再次确认',
+                    );
+                  }
+                  return respondWith(
+                    await submitConfirmedLeave({
+                      execution,
+                      principal: principal!,
+                      sessionId,
+                      trace: actionTrace,
+                      requestId,
+                    }),
+                  );
+                }
+                if (execution.status === 'succeeded' && execution.resultRef) {
+                  return respondWith(
+                    await replayConfirmedLeave({
+                      execution,
+                      principal: principal!,
+                      trace: actionTrace,
+                      replayed: true,
+                    }),
+                  );
+                }
+                if (
+                  execution.status === 'submitting' ||
+                  (execution.status === 'executing' && execution.phase === 'submitting')
+                ) {
+                  return respondWith(inFlightLeaveReply(execution, actionTrace));
+                }
+                throw new CampusHttpError(
+                  409,
+                  'EXECUTION_NOT_CONFIRMABLE',
+                  '当前执行不能通过该动作确认，请在助手中重新发起',
+                );
+              },
+            );
+            await auditLedger.append({
+              requestId,
+              principal,
+              action,
+              resource: executionId,
+              outcome: 'succeeded',
+              statusCode: result.status,
+              durationMs: Date.now() - startedAt,
+              requestHash,
+              idempotencyKey,
+              replayed: result.replayed,
+            });
+            const responseExecution = result.body.execution as JsonObject | null;
+            await appendTrace(requestTrace, {
+              event: 'execution.state',
+              label: result.replayed
+                ? '幂等重放：复用首次执行结果'
+                : `执行状态：${String(responseExecution?.status || 'unknown')}`,
+              executionId: responseExecution
+                ? String(responseExecution.executionId || '')
+                : executionId,
+              phase: responseExecution ? String(responseExecution.phase || '') : undefined,
+              status: responseExecution ? String(responseExecution.status || '') : undefined,
+              replayed: result.replayed,
+              outcome: responseExecution?.status === 'cancelled' ? 'cancelled' : 'succeeded',
+            });
+            await appendTrace(requestTrace, {
+              event: 'request.completed',
+              label: '结构化动作处理完成',
+              executionId: responseExecution
+                ? String(responseExecution.executionId || '')
+                : executionId,
               durationMs: Date.now() - startedAt,
               replayed: result.replayed,
               outcome: 'succeeded',
@@ -2250,7 +3049,7 @@ export async function handleCampusAssistantRequest(
               await appendTrace(requestTrace, {
                 event: 'request.failed',
                 label: status === 504 ? '本轮处理超时' : '本轮处理失败',
-                executionId: executionToFail?.executionId,
+                executionId: (executionToFail as ExecutionState | null)?.executionId,
                 durationMs: Date.now() - startedAt,
                 outcome: status === 504 ? 'timed-out' : 'failed',
                 errorCode: code,
@@ -2259,9 +3058,10 @@ export async function handleCampusAssistantRequest(
               console.error('[campus-trace]', traceError);
             }
           }
-          if (executionToFail && isActiveExecution(executionToFail)) {
+          const failedExecution = executionToFail as ExecutionState | null;
+          if (failedExecution && isActiveExecution(failedExecution)) {
             try {
-              await executionStateStore.transition(executionToFail.executionId, {
+              await executionStateStore.transition(failedExecution.executionId, {
                 status: 'failed',
                 phase: status === 504 ? 'timed-out' : 'failed',
                 summary:
@@ -2296,6 +3096,15 @@ export async function handleCampusAssistantRequest(
               console.error('[campus-assistant-audit]', auditError);
             }
           }
+          if (executionForResponse) {
+            try {
+              executionForResponse =
+                (await executionStateStore.find(executionForResponse.executionId)) ||
+                executionForResponse;
+            } catch {
+              // The response can still use the last state read before the error.
+            }
+          }
           sendJson(
             response,
             status,
@@ -2303,6 +3112,8 @@ export async function handleCampusAssistantRequest(
               error: known ? error.message : '校园助手暂时不可用，请稍后重试',
               code,
               requestId,
+              traceRequestId: requestTrace ? requestId : undefined,
+              execution: publicExecutionState(executionForResponse),
             },
             { 'x-request-id': requestId },
           );

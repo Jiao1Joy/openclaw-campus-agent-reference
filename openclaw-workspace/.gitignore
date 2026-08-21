@@ -1,0 +1,25 @@
+# OpenClaw runtime state
+.openclaw/
+openclaw-workspace-state.json
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+
+# Runtime business state and evidence
+data/*
+!data/course-data.json
+data/**/*.lock
+data/**/*-transaction.json
+
+# Local logs and secrets
+*.log
+.env
+.env.*
+!.env.example
+openclaw.json
+
+# The router workspace backup is stored under router-workspace/.

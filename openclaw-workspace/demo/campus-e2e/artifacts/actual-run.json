@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "runAt": "2026-08-21T15:26:06+08:00",
+  "isolation": "系统临时目录；仅复制 course-data.json，所有业务状态与证据均写入副本",
+  "sourceDataUntouched": true,
+  "leaveDemo": {
+    "previewState": "awaiting-confirmation",
+    "previewMessage": "发现 1 门可能受影响的 Demo 课程。请假信息已齐全，可以展示完整摘要并等待确认。 当前只生成预览，尚未提交请假。",
+    "impactCount": 1,
+    "affectedCourses": [
+      {
+        "sectionId": "CS203-01",
+        "courseName": "计算机网络",
+        "teacher": "吴教授",
+        "start": "2026-08-12T10:10:00+08:00",
+        "end": "2026-08-12T11:50:00+08:00",
+        "location": "博学楼 B301",
+        "demo": true
+      }
+    ],
+    "previewWroteLeave": false,
+    "firstSubmitStatus": "evaluating",
+    "firstSubmitIdempotent": false,
+    "replayIdempotent": true,
+    "sameRequestOnReplay": true,
+    "requestId": "LV20260821-2BDDD3",
+    "firstSubmitStatusLabel": "审批中",
+    "auditVerify": {
+      "ok": true,
+      "action": "verify-audit",
+      "events": 3,
+      "issues": []
+    },
+    "auditChain": {
+      "events": 3,
+      "ok": true
+    }
+  },
+  "courseDemo": {
+    "requiresTeacherChoice": true,
+    "teacherChoice": "PE201=PE201-02",
+    "planStatus": "pending-confirmation",
+    "newCredits": 10.0,
+    "selectedSections": [
+      {
+        "sectionId": "CS301-01",
+        "courseName": "操作系统"
+      },
+      {
+        "sectionId": "PE201-02",
+        "courseName": "大学体育（四）· 篮球"
+      },
+      {
+        "sectionId": "CSE301-01",
+        "courseName": "开源软件工程实践"
+      },
+      {
+        "sectionId": "GE201-01",
+        "courseName": "现代书法鉴赏"
+      }
+    ],
+    "submitStatus": "submitted",
+    "submitReplayIdempotent": true,
+    "submissionId": "CS-20260811100000-C4B3",
+    "finalRevalidationPassed": true,
+    "faultInjection": {
+      "sectionId": "CS301-01",
+      "before": 46,
+      "after": 47,
+      "transactionId": "TX-DEMO-PARTIAL-001"
+    },
+    "recovery": {
+      "recovered": true,
+      "reconciled": false,
+      "transactionId": "TX-DEMO-PARTIAL-001"
+    },
+    "recoveryRestoredEnrollment": true,
+    "journalCleared": true,
+    "rollbackStatus": "rolled-back",
+    "rollbackReplayIdempotent": true,
+    "sandboxCourseDataRestored": true,
+    "auditVerify": {
+      "ok": true,
+      "action": "verify-audit",
+      "events": 7,
+      "issues": []
+    },
+    "auditChain": {
+      "events": 7,
+      "firstPreviousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lastHash": "62d3b7e89dd505e4e4076d49afdd8b54016889aa6b86f8e64febe16c79726826",
+      "integrityModes": [
+        "hmac-sha256"
+      ]
+    }
+  },
+  "sourceDataCheck": {
+    "fileCountBefore": 5,
+    "fileCountAfter": 5,
+    "hashesMatch": true,
+    "courseDataSha256": "086ce90003923db29e9b1743f14e140e138be9cca98680df1b95eea113f3d8be"
+  }
+}

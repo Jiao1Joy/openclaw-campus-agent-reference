@@ -2,13 +2,14 @@ import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import type { CampusCapability } from './capabilityRegistry.ts';
-import type { JsonObject } from './security.ts';
+import { CampusHttpError, type JsonObject } from './security.ts';
 
 export type ExecutionStatus =
   | 'collecting'
   | 'awaiting-input'
   | 'awaiting-confirmation'
   | 'executing'
+  | 'submitting'
   | 'succeeded'
   | 'cancelled'
   | 'failed'
@@ -132,6 +133,24 @@ export class ExecutionStateStore {
     });
   }
 
+  find(executionId: string): Promise<ExecutionState | null> {
+    return this.serialized(async () => {
+      const states = await this.load();
+      if (this.expire(states)) await this.save(states);
+      return states.find((state) => state.executionId === executionId) || null;
+    });
+  }
+
+  listBySession(ownerHash: string, sessionId: string): Promise<ExecutionState[]> {
+    return this.serialized(async () => {
+      const states = await this.load();
+      if (this.expire(states)) await this.save(states);
+      return states.filter(
+        (state) => state.ownerHash === ownerHash && state.sessionId === sessionId,
+      );
+    });
+  }
+
   start(
     ownerHash: string,
     sessionId: string,
@@ -181,6 +200,7 @@ export class ExecutionStateStore {
       errorCode?: string;
       context?: JsonObject;
       expiresAt?: string;
+      expectedStatus?: ExecutionStatus | ExecutionStatus[];
     },
   ): Promise<ExecutionState> {
     return this.serialized(async () => {
@@ -188,6 +208,18 @@ export class ExecutionStateStore {
       this.expire(states);
       const state = states.find((candidate) => candidate.executionId === executionId);
       if (!state) throw new Error('执行状态不存在或已被清理');
+      if (input.expectedStatus) {
+        const allowed = Array.isArray(input.expectedStatus)
+          ? input.expectedStatus
+          : [input.expectedStatus];
+        if (!allowed.includes(state.status)) {
+          throw new CampusHttpError(
+            409,
+            'EXECUTION_STATE_CONFLICT',
+            `执行状态已从 ${state.status} 变化，不能按预期状态 ${allowed.join('/')} 继续`,
+          );
+        }
+      }
       state.status = input.status;
       state.phase = input.phase;
       state.updatedAt = new Date().toISOString();

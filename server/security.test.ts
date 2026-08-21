@@ -14,7 +14,7 @@ import {
 } from './security.ts';
 
 const principal: CampusPrincipal = {
-  studentId: '202400001',
+  studentId: '202408621',
   studentName: '林同学',
   college: '计算机与人工智能学院',
   className: '软件工程 2401 班',

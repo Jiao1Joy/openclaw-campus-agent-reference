@@ -5,9 +5,7 @@ import { validateSkillManifest } from './skillContract.ts';
 
 const workspace =
   process.env.CAMPUS_WORKSPACE ||
-  (existsSync(resolve(process.cwd(), 'openclaw-workspace'))
-    ? resolve(process.cwd(), 'openclaw-workspace')
-    : join(process.env.USERPROFILE || '', '.openclaw', 'workspace-campus'));
+  join(process.env.USERPROFILE || '', '.openclaw', 'workspace-campus');
 const skillsDirectory = join(workspace, 'skills');
 const capabilities = discoverCapabilityManifests(workspace);
 const errors: string[] = [];
@@ -29,7 +27,7 @@ for (const directory of readdirSync(skillsDirectory, { withFileTypes: true })) {
     const entrypoint = resolve(root, manifest.entrypoint.path);
     if (!existsSync(entrypoint)) errors.push(`${directory.name}: 入口不存在`);
     const document = readFileSync(skillDocument, 'utf8');
-    if (!document.startsWith('---\n') || !document.includes(`name: ${directory.name}`)) {
+    if (!/^---\r?\n/.test(document) || !document.includes(`name: ${directory.name}`)) {
       errors.push(`${directory.name}: SKILL.md frontmatter 名称与目录不一致`);
     }
   } catch (error) {

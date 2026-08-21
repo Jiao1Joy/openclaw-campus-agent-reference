@@ -26,9 +26,9 @@ export const NAV_ITEMS: NavItem[] = [
 
 /** 当前用户 */
 export const CURRENT_USER: CurrentUser = {
-  id: 'u-demo-student-001',
+  id: 'u-2024-008621',
   name: '林同学',
-  studentId: '202400001',
+  studentId: '202408621',
   avatarColor: '#2457D6',
   initial: '林',
   department: '计算机与人工智能学院',

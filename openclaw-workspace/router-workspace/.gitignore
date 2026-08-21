@@ -1,0 +1,12 @@
+# OpenClaw runtime state
+openclaw-workspace-state.json
+sessions/
+memory/
+*.log
+
+# Local credentials and environment
+.env
+.env.*
+*credentials*.json
+*auth*.json
+*token*.json

@@ -1,7 +1,7 @@
 # 扩充 Demo 课程数据报告 · `course-data-expanded.candidate.json`
 
 - 生成模型：GLM-5.2
-- 数据来源：读取并保留仓库内 `openclaw-workspace/data/course-data.json` 的全部字段与已有 ID（**未覆盖原文件**）。
+- 数据来源：读取并保留原 Demo `openclaw-workspace/data/course-data.json` 的全部字段与已有 ID（**未覆盖原文件**）。
 - 输出文件：`evals/fixtures/course-data-expanded.candidate.json`（候选，仅供评测）。
 - 生成方式：结构化脚本生成，所有教师引用、先修课引用、容量、时间均经内部一致性断言。
 - 自检结果：**PASS（0 错误）**，详见末节。

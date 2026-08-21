@@ -1,9 +1,21 @@
 import assert from 'node:assert/strict';
+import { execFile } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { promisify } from 'node:util';
 import test from 'node:test';
 import { createServer } from 'vite';
+
+const execFileAsync = promisify(execFile);
+const CAMPUS_WORKSPACE_DIR = 'C:\\Users\\Admin\\.openclaw\\workspace-campus';
+const INIT_DEMO_DB = join(
+  CAMPUS_WORKSPACE_DIR,
+  'campus-services',
+  'src',
+  'bin',
+  'initDemoDb.ts',
+);
 
 test('campus API enforces idempotency, privacy, audit, and rollback permissions', async () => {
   const directory = join(tmpdir(), `campus-api-${crypto.randomUUID()}`);
@@ -16,19 +28,25 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
     idempotencyFile: process.env.CAMPUS_IDEMPOTENCY_FILE,
     executionStateFile: process.env.CAMPUS_EXECUTION_STATE_FILE,
     traceFile: process.env.CAMPUS_TRACE_FILE,
-    leaveDataFile: process.env.CAMPUS_LEAVE_DATA_FILE,
-    leaveAuditFile: process.env.CAMPUS_LEAVE_AUDIT_FILE,
+    dbFile: process.env.CAMPUS_DB_FILE,
+    frozenNow: process.env.CAMPUS_NOW,
     routerMode: process.env.CAMPUS_OPENCLAW_ROUTER_MODE,
+    agentMode: process.env.CAMPUS_ADMIN_AGENT_MODE,
   };
   process.env.CAMPUS_AUTH_MODE = 'demo';
-  process.env.CAMPUS_WORKSPACE = join(process.cwd(), 'openclaw-workspace');
+  process.env.CAMPUS_WORKSPACE = CAMPUS_WORKSPACE_DIR;
   process.env.CAMPUS_API_AUDIT_FILE = join(directory, 'api-audit.jsonl');
   process.env.CAMPUS_IDEMPOTENCY_FILE = join(directory, 'idempotency.json');
   process.env.CAMPUS_EXECUTION_STATE_FILE = join(directory, 'executions.json');
   process.env.CAMPUS_TRACE_FILE = join(directory, 'traces.jsonl');
-  process.env.CAMPUS_LEAVE_DATA_FILE = join(directory, 'leave-requests.json');
-  process.env.CAMPUS_LEAVE_AUDIT_FILE = join(directory, 'leave-audit.jsonl');
+  process.env.CAMPUS_DB_FILE = join(directory, 'campus-demo.sqlite3');
+  process.env.CAMPUS_NOW = '2026-08-17T10:00:00+08:00';
   process.env.CAMPUS_OPENCLAW_ROUTER_MODE = 'rules-for-tests';
+  process.env.CAMPUS_ADMIN_AGENT_MODE = 'deterministic';
+  await execFileAsync(process.env.NODE_BIN || 'node', [INIT_DEMO_DB], {
+    env: { ...process.env },
+    windowsHide: true,
+  });
 
   const { campusAssistantPlugin } = await import(
     `./campusAssistantPlugin.ts?test=${crypto.randomUUID()}`
@@ -46,6 +64,14 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
     const address = server.httpServer?.address();
     assert.ok(address && typeof address === 'object');
     const baseUrl = `http://127.0.0.1:${address.port}`;
+    const listLeaveRecords = async () => {
+      const response = await fetch(`${baseUrl}/api/campus-assistant/leave-requests`);
+      assert.equal(response.status, 200);
+      const payload = (await response.json()) as {
+        requests: Array<Record<string, unknown>>;
+      };
+      return payload.requests;
+    };
 
     const health = await fetch(`${baseUrl}/api/campus-assistant/health`);
     assert.equal(health.status, 200);
@@ -56,7 +82,7 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
     const sessionPayload = (await session.json()) as {
       principal: Record<string, unknown>;
     };
-    assert.equal(sessionPayload.principal.studentIdMasked, '****0001');
+    assert.equal(sessionPayload.principal.studentIdMasked, '****8621');
     assert.equal(Object.hasOwn(sessionPayload.principal, 'studentId'), false);
 
     const capabilities = await fetch(
@@ -124,17 +150,22 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       end: '2026-08-17T16:00:00+08:00',
       reasonSummary: '需要去医院检查',
     });
-    assert.deepEqual(orchestrationCard?.actions, [
-      { kind: 'send-message', label: '确认提交', message: '确认提交' },
-      { kind: 'send-message', label: '取消', message: '取消' },
-    ]);
+    const orchestrationActions = (
+      orchestrationCard as { actions?: Array<Record<string, unknown>> } | undefined
+    )?.actions;
+    assert.equal(orchestrationActions?.length, 2);
+    assert.equal(orchestrationActions?.[0]?.kind, 'execution-action');
+    assert.equal(orchestrationActions?.[0]?.action, 'confirm');
+    assert.equal(orchestrationActions?.[0]?.label, '确认提交');
+    assert.match(String(orchestrationActions?.[0]?.executionId || ''), /^EX-/);
+    assert.match(String(orchestrationActions?.[0]?.previewHash || ''), /^[a-f0-9]{64}$/);
+    assert.equal(orchestrationActions?.[1]?.kind, 'execution-action');
+    assert.equal(orchestrationActions?.[1]?.action, 'cancel');
+    assert.equal(orchestrationActions?.[1]?.label, '取消');
     assert.deepEqual(orchestrationCard?.impacts?.map((impact) => impact.id), [
       'CS202-01',
     ]);
-    await assert.rejects(
-      readFile(process.env.CAMPUS_LEAVE_DATA_FILE, 'utf8'),
-      /ENOENT/,
-    );
+    assert.equal((await listLeaveRecords()).length, 0);
 
     const vagueTimePreview = await fetch(
       `${baseUrl}/api/campus-assistant/chat`,
@@ -204,6 +235,7 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
     const orchestrationConfirmPayload = (await orchestrationConfirm.json()) as {
       reply: string;
       execution: { status: string; resultRef: string };
+      cards: Array<{ type: string; evidence?: string[] }>;
     };
     assert.equal(orchestrationConfirmPayload.execution.status, 'succeeded');
     assert.match(orchestrationConfirmPayload.execution.resultRef, /^LV/);
@@ -211,14 +243,22 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       orchestrationConfirmPayload.reply,
       new RegExp(orchestrationConfirmPayload.execution.resultRef),
     );
-    const isolatedLeaveRecords = JSON.parse(
-      await readFile(process.env.CAMPUS_LEAVE_DATA_FILE, 'utf8'),
-    ) as Array<{ id: string }>;
+    assert.equal(orchestrationConfirmPayload.cards[0]?.type, 'action-result');
+    const confirmEvidence = orchestrationConfirmPayload.cards[0]?.evidence as string[];
+    assert.equal(confirmEvidence.length, 4);
+    assert.match(confirmEvidence[0] as string, /首次提交：(approved_auto|manual_review)/);
+    assert.match(confirmEvidence[1] as string, /审批状态：(已自动批准|待人工复核)/);
+    assert.match(confirmEvidence[2] as string, /同键重放：true/);
+    assert.match(confirmEvidence[3] as string, /审计校验：ok=true/);
+    assert.match(orchestrationConfirmPayload.reply, /当前状态：(已自动批准|待人工复核)/);
+    const isolatedLeaveRecords = await listLeaveRecords();
     assert.equal(isolatedLeaveRecords.length, 1);
     assert.equal(
-      isolatedLeaveRecords[0].id,
+      isolatedLeaveRecords[0]?.id,
       orchestrationConfirmPayload.execution.resultRef,
     );
+    assert.equal(isolatedLeaveRecords[0]?.status, 'manual_review');
+    assert.equal(isolatedLeaveRecords[0]?.statusLabel, '待人工复核');
     const orchestrationConfirmReplay = await fetch(
       `${baseUrl}/api/campus-assistant/chat`,
       {
@@ -239,10 +279,7 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       orchestrationConfirmReplay.headers.get('idempotency-replayed'),
       'true',
     );
-    assert.deepEqual(
-      JSON.parse(await readFile(process.env.CAMPUS_LEAVE_DATA_FILE, 'utf8')),
-      isolatedLeaveRecords,
-    );
+    assert.deepEqual(await listLeaveRecords(), isolatedLeaveRecords);
 
     const contextPreview = await fetch(`${baseUrl}/api/campus-assistant/chat`, {
       method: 'POST',
@@ -300,10 +337,7 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       end: '2026-08-18T18:00:00+08:00',
       reasonSummary: '去医院看病',
     });
-    assert.deepEqual(
-      JSON.parse(await readFile(process.env.CAMPUS_LEAVE_DATA_FILE, 'utf8')),
-      isolatedLeaveRecords,
-    );
+    assert.deepEqual(await listLeaveRecords(), isolatedLeaveRecords);
 
     const contextConfirm = await fetch(`${baseUrl}/api/campus-assistant/chat`, {
       method: 'POST',
@@ -322,9 +356,7 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       execution: { resultRef: string; status: string };
     };
     assert.equal(contextConfirmPayload.execution.status, 'succeeded');
-    const recordsAfterContextConfirm = JSON.parse(
-      await readFile(process.env.CAMPUS_LEAVE_DATA_FILE, 'utf8'),
-    ) as Array<{ id: string; start: string; end: string; reason: string }>;
+    const recordsAfterContextConfirm = await listLeaveRecords();
     const contextRecord = recordsAfterContextConfirm.find(
       (record) => record.id === contextConfirmPayload.execution.resultRef,
     );
@@ -340,6 +372,70 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
       end: '2026-08-18T18:00:00+08:00',
       reason: '去医院看病',
     });
+
+    // 重复提交一条已人工批准的申请：文案必须描述真实状态，
+    // 不得出现“已人工批准……已转人工复核”的自相矛盾
+    const adminCli = join(
+      CAMPUS_WORKSPACE_DIR,
+      'campus-services',
+      'src',
+      'bin',
+      'campusAdminCli.ts',
+    );
+    const firstRecordId = String(isolatedLeaveRecords[0]?.id ?? '');
+    const { execFile: execFileCb } = await import('node:child_process');
+    const approveOutput = await new Promise<string>((resolve, reject) => {
+      const child = (execFileCb as typeof execFile)(
+        process.env.NODE_BIN || 'node',
+        [adminCli, 'leave-approve'],
+        { env: { ...process.env, CAMPUS_REQUEST_ID: 'test-admin-approve-1' }, windowsHide: true },
+        (error, stdout) => (error ? reject(error) : resolve(stdout)),
+      );
+      child.stdin?.write(JSON.stringify({ id: firstRecordId, reason: '情况属实，同意就医' }));
+      child.stdin?.end();
+    });
+    const approvedRecord = JSON.parse(approveOutput) as {
+      request: { status: string };
+    };
+    assert.equal(approvedRecord.request.status, 'approved_manual');
+
+    const resubmitPreview = await fetch(`${baseUrl}/api/campus-assistant/chat`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'idempotency-key': 'integration-resubmit-preview-0001',
+        'x-request-id': 'integration-resubmit-preview-request-0001',
+      },
+      body: JSON.stringify({
+        message: '我在2026-08-17 14:00-16:00请病假会错过哪些课？因为需要去医院检查',
+        sessionId: 'resubmit-duplicate-test',
+      }),
+    });
+    assert.equal(resubmitPreview.status, 200);
+    const resubmitConfirm = await fetch(`${baseUrl}/api/campus-assistant/chat`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'idempotency-key': 'integration-resubmit-confirm-0001',
+        'x-request-id': 'integration-resubmit-confirm-request-0001',
+      },
+      body: JSON.stringify({
+        message: '确认提交',
+        sessionId: 'resubmit-duplicate-test',
+      }),
+    });
+    assert.equal(resubmitConfirm.status, 200);
+    const resubmitPayload = (await resubmitConfirm.json()) as {
+      reply: string;
+      execution: { resultRef: string };
+      cards: Array<{ evidence?: string[] }>;
+    };
+    assert.equal(resubmitPayload.execution.resultRef, firstRecordId);
+    assert.match(resubmitPayload.reply, /当前状态：已人工批准/);
+    assert.doesNotMatch(resubmitPayload.reply, /转人工复核/);
+    assert.match(resubmitPayload.reply, /相同内容的申请已存在/);
+    const resubmitEvidence = resubmitPayload.cards[0]?.evidence as string[];
+    assert.match(resubmitEvidence[1] as string, /审批状态：已人工批准/);
 
     const missingKey = await fetch(`${baseUrl}/api/campus-assistant/chat`, {
       method: 'POST',
@@ -703,11 +799,13 @@ test('campus API enforces idempotency, privacy, audit, and rollback permissions'
     else process.env.CAMPUS_EXECUTION_STATE_FILE = previous.executionStateFile;
     if (previous.traceFile === undefined) delete process.env.CAMPUS_TRACE_FILE;
     else process.env.CAMPUS_TRACE_FILE = previous.traceFile;
-    if (previous.leaveDataFile === undefined) delete process.env.CAMPUS_LEAVE_DATA_FILE;
-    else process.env.CAMPUS_LEAVE_DATA_FILE = previous.leaveDataFile;
-    if (previous.leaveAuditFile === undefined) delete process.env.CAMPUS_LEAVE_AUDIT_FILE;
-    else process.env.CAMPUS_LEAVE_AUDIT_FILE = previous.leaveAuditFile;
+    if (previous.dbFile === undefined) delete process.env.CAMPUS_DB_FILE;
+    else process.env.CAMPUS_DB_FILE = previous.dbFile;
+    if (previous.frozenNow === undefined) delete process.env.CAMPUS_NOW;
+    else process.env.CAMPUS_NOW = previous.frozenNow;
     if (previous.routerMode === undefined) delete process.env.CAMPUS_OPENCLAW_ROUTER_MODE;
     else process.env.CAMPUS_OPENCLAW_ROUTER_MODE = previous.routerMode;
+    if (previous.agentMode === undefined) delete process.env.CAMPUS_ADMIN_AGENT_MODE;
+    else process.env.CAMPUS_ADMIN_AGENT_MODE = previous.agentMode;
   }
 });

@@ -57,6 +57,7 @@ export interface CampusExecutionState {
     | 'awaiting-input'
     | 'awaiting-confirmation'
     | 'executing'
+    | 'submitting'
     | 'succeeded'
     | 'cancelled'
     | 'failed'
@@ -88,15 +89,32 @@ export interface CampusTraceEvent {
   executionId?: string;
   phase?: string;
   status?: string;
-  tool?: 'openclaw-router' | 'openclaw-agent' | 'campus-course' | 'campus-leave' | 'campus-knowledge' | 'campus-agentic-search' | 'campus-leave-impact';
+  tool?: 'openclaw-router' | 'openclaw-agent' | 'campus-course' | 'campus-leave' | 'campus-knowledge' | 'campus-agentic-search' | 'campus-leave-impact' | 'campus-admin-agent';
   durationMs?: number;
-  routeSource?: 'llm' | 'active-execution' | 'none';
+  routeSource?:
+    | 'llm'
+    | 'small-model'
+    | 'deterministic-rules'
+    | 'active-execution'
+    | 'confirm-fast-path'
+    | 'execution-action'
+    | 'none';
   outcome?: 'started' | 'succeeded' | 'failed' | 'cancelled' | 'timed-out';
   errorCode?: string;
   replayed?: boolean;
   sequence: number;
   timestamp: string;
 }
+
+export type CampusCardAction =
+  | { kind: 'send-message'; label: string; message: string }
+  | {
+      kind: 'execution-action';
+      action: 'confirm' | 'cancel';
+      label: string;
+      executionId: string;
+      previewHash: string;
+    };
 
 export type CampusResultCard =
   | {
@@ -170,11 +188,7 @@ export type CampusResultCard =
         summary: string;
       }>;
       missing: string[];
-      actions: Array<{
-        kind: 'send-message';
-        label: string;
-        message: string;
-      }>;
+      actions: CampusCardAction[];
       demo: true;
     };
 
@@ -282,4 +296,34 @@ export async function getCampusExecutionTrace(
     throw new Error(payload.error || '无法读取执行过程');
   }
   return payload.events;
+}
+
+export interface CampusAssistantTurnResponse {
+  reply?: string;
+  sessionId?: string;
+  cards?: CampusResultCard[];
+  execution?: CampusExecutionState | null;
+  traceRequestId?: string;
+  error?: string;
+  code?: string;
+}
+
+/**
+ * 结构化确认动作：确认卡片按钮不再发送纯文本，而是携带执行编号与
+ * 预览哈希调用独立端点，由服务端校验所有权、会话、状态与预览一致性。
+ */
+export async function postExecutionAction(
+  executionId: string,
+  payload: { action: 'confirm' | 'cancel'; previewHash: string; sessionId: string },
+): Promise<{ response: Response; body: CampusAssistantTurnResponse }> {
+  const response = await campusApiFetch(
+    `/api/campus-assistant/executions/${encodeURIComponent(executionId)}/actions`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+    },
+  );
+  const body = (await response.json()) as CampusAssistantTurnResponse;
+  return { response, body };
 }

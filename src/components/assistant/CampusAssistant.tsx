@@ -33,11 +33,14 @@ import {
   getCurrentCampusExecution,
   getCampusExecutionTrace,
   getCampusTrace,
+  postExecutionAction,
   type CampusCapability,
+  type CampusAssistantTurnResponse,
   type CampusExecutionState,
   type CampusResultCard,
   type CampusTraceEvent,
 } from '@/services/campusApi';
+import { assistantFailurePresentation } from './failurePresentation';
 
 interface ChatMessage {
   id: string;
@@ -181,6 +184,62 @@ export const CampusAssistant: FC = () => {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [assistantOpen, closeAssistant]);
 
+  const refreshTraceForRequest = (traceRequestId?: string) => {
+    if (traceRequestId) {
+      void getCampusTrace(traceRequestId)
+        .then((events) => {
+          setTraceEvents(events);
+          if (events.some((event) => event.outcome === 'failed' || event.outcome === 'timed-out')) {
+            setTraceOpen(true);
+          }
+        })
+        .catch(() => setTraceEvents([]));
+    } else {
+      // 没有本轮追踪时清空上一轮记录，避免把旧追踪显示成当前请求结果。
+      setTraceEvents([]);
+    }
+  };
+
+  const applyAssistantResult = (result: CampusAssistantTurnResponse) => {
+    if (result.sessionId) {
+      setSessionId(result.sessionId);
+      window.localStorage.setItem(SESSION_KEY, result.sessionId);
+    }
+    setExecution(result.execution || null);
+    refreshTraceForRequest(result.traceRequestId);
+    setMessages((previous) => [
+      ...previous,
+      newMessage('assistant', result.reply || '', {
+        cards: result.cards,
+      }),
+    ]);
+    if (/选课已提交|选课提交成功/.test(result.reply || '')) {
+      showToast({
+        variant: 'success',
+        title: '选课方案已提交',
+        description: '提交前名额、先修课、学分和时间冲突复核均已通过',
+      });
+    } else if (/请假申请已提交|请假.*提交成功|请假已提交/.test(result.reply || '')) {
+      const leaveTodo = todos.find((item) => item.type === 'leave');
+      if (leaveTodo) resolveTodo(leaveTodo.id);
+      showToast({
+        variant: 'success',
+        title: '请假申请已提交',
+        description: '可以继续在校园助手中查询审批进度',
+      });
+    }
+  };
+
+  const handleAssistantFailure = (result: CampusAssistantTurnResponse) => {
+    const presentation = assistantFailurePresentation(result);
+    refreshTraceForRequest(presentation.traceRequestId);
+    if (presentation.execution !== undefined) setExecution(result.execution || null);
+    setMessages((previous) => [
+      ...previous,
+      newMessage('assistant', presentation.message),
+    ]);
+  };
+
   const sendMessage = async (rawMessage: string) => {
     const message = rawMessage.trim();
     if (!message || sending) return;
@@ -195,59 +254,58 @@ export const CampusAssistant: FC = () => {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ message, sessionId: requestSessionId }),
       });
-      const result = (await response.json()) as {
-        reply?: string;
-        sessionId?: string;
-        cards?: CampusResultCard[];
-        execution?: CampusExecutionState | null;
-        traceRequestId?: string;
-        error?: string;
-      };
+      const result = (await response.json()) as CampusAssistantTurnResponse;
       if (requestGeneration !== sessionGenerationRef.current) return;
       if (!response.ok || !result.reply) {
-        throw new Error(result.error || '请求失败');
+        handleAssistantFailure(result);
+        return;
       }
-      if (result.sessionId) {
-        setSessionId(result.sessionId);
-        window.localStorage.setItem(SESSION_KEY, result.sessionId);
-      }
-      setExecution(result.execution || null);
-      if (result.traceRequestId) {
-        void getCampusTrace(result.traceRequestId)
-          .then(setTraceEvents)
-          .catch(() => setTraceEvents([]));
-      }
-      setMessages((previous) => [
-        ...previous,
-        newMessage('assistant', result.reply || '', {
-          cards: result.cards,
-        }),
-      ]);
-      if (/选课已提交|选课提交成功/.test(result.reply)) {
-        showToast({
-          variant: 'success',
-          title: '选课方案已提交',
-          description: '提交前名额、先修课、学分和时间冲突复核均已通过',
-        });
-      } else if (/请假申请已提交|请假.*提交成功/.test(result.reply)) {
-        const leaveTodo = todos.find((item) => item.type === 'leave');
-        if (leaveTodo) resolveTodo(leaveTodo.id);
-        showToast({
-          variant: 'success',
-          title: '请假申请已提交',
-          description: '可以继续在校园助手中查询审批进度',
-        });
-      }
+      applyAssistantResult(result);
     } catch (error) {
       if (requestGeneration !== sessionGenerationRef.current) return;
       const detail = error instanceof Error ? error.message : '服务异常';
-      setMessages((previous) => [
-        ...previous,
-        newMessage(
-          'assistant',
-          `抱歉，${detail}。本次操作尚未提交，请稍后再试。`,
-        ),
-      ]);
+      handleAssistantFailure({ error: detail });
+    } finally {
+      if (requestGeneration === sessionGenerationRef.current) {
+        setSending(false);
+        window.setTimeout(() => inputRef.current?.focus(), 0);
+      }
+    }
+  };
+
+  const runExecutionAction = async (
+    action: {
+      kind: 'execution-action';
+      action: 'confirm' | 'cancel';
+      label: string;
+      executionId: string;
+      previewHash: string;
+    },
+  ) => {
+    if (sending) return;
+    const requestGeneration = sessionGenerationRef.current;
+    const requestSessionId = sessionId;
+    setMessages((previous) => [
+      ...previous,
+      newMessage('user', action.action === 'confirm' ? '确认提交' : '取消'),
+    ]);
+    setSending(true);
+    try {
+      const { response, body } = await postExecutionAction(action.executionId, {
+        action: action.action,
+        previewHash: action.previewHash,
+        sessionId: requestSessionId,
+      });
+      if (requestGeneration !== sessionGenerationRef.current) return;
+      if (!response.ok || !body.reply) {
+        handleAssistantFailure(body);
+        return;
+      }
+      applyAssistantResult(body);
+    } catch (error) {
+      if (requestGeneration !== sessionGenerationRef.current) return;
+      const detail = error instanceof Error ? error.message : '服务异常';
+      handleAssistantFailure({ error: detail });
     } finally {
       if (requestGeneration === sessionGenerationRef.current) {
         setSending(false);
@@ -354,7 +412,7 @@ export const CampusAssistant: FC = () => {
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-medium text-ink">校园统一身份已验证</p>
                 <p className="mt-0.5 truncate text-[11px] text-ink-muted">
-                  Demo 学生 · 计算机与人工智能学院 · 学号末四位 0001
+                  林同学 · 计算机与人工智能学院 · 学号末四位 8621
                 </p>
               </div>
               <CheckCircle2 className="h-4 w-4 text-state-success" aria-hidden="true" />
@@ -416,6 +474,7 @@ export const CampusAssistant: FC = () => {
                       'awaiting-input': '等待选择',
                       'awaiting-confirmation': '等待确认',
                       executing: '执行中',
+                      submitting: '提交中',
                       succeeded: '已完成',
                       cancelled: '已取消',
                       failed: '失败',
@@ -605,16 +664,24 @@ export const CampusAssistant: FC = () => {
                                   </div>
                                 ))}
                               </div>
-                            ) : <p className="mt-3 text-[10px] text-ink-muted">未发现当天受影响的 Demo 课程。</p>}
+                            ) : card.steps.some((step) => step.capabilityId === 'campus.course') ? (
+                              <p className="mt-3 text-[10px] text-ink-muted">未发现当天受影响的 Demo 课程。</p>
+                            ) : null}
                             {card.missing.length > 0 && <p className="mt-3 text-[10px] leading-4 text-amber-600">请补充：{card.missing.join('、')}</p>}
                             {card.actions.length > 0 && (
                               <div className="mt-3 grid grid-cols-2 gap-2 border-t border-surface-border pt-3">
                                 {card.actions.map((action, index) => (
                                   <button
-                                    key={`${card.id}:${action.message}`}
+                                    key={`${card.id}:${action.kind}:${action.label}`}
                                     type="button"
                                     disabled={sending}
-                                    onClick={() => void sendMessage(action.message)}
+                                    onClick={() => {
+                                      if (action.kind === 'execution-action') {
+                                        void runExecutionAction(action);
+                                      } else {
+                                        void sendMessage(action.message);
+                                      }
+                                    }}
                                     className={index === 0
                                       ? 'rounded-btn bg-brand px-3 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-brand-hover disabled:opacity-50'
                                       : 'rounded-btn border border-surface-border bg-white px-3 py-2.5 text-xs font-semibold text-ink-body transition-colors hover:bg-surface-page disabled:opacity-50'}
@@ -633,6 +700,16 @@ export const CampusAssistant: FC = () => {
                           <div className="flex items-center gap-2"><CheckCircle2 className={`h-4 w-4 ${card.status === 'success' ? 'text-state-success' : 'text-brand'}`} /><p className="text-xs font-semibold text-ink">{card.title}</p></div>
                           <p className="mt-2 text-[11px] text-ink-body">{card.summary}</p>
                           {card.resultRef && <p className="mt-1 text-[10px] text-ink-muted">结果引用：{card.resultRef}</p>}
+                          {card.evidence.length > 0 && (
+                            <div className="mt-3 grid gap-1.5 rounded-btn border border-state-success/15 bg-state-success/[0.045] p-2.5">
+                              {card.evidence.map((item) => (
+                                <p key={item} className="flex items-start gap-1.5 text-[10px] leading-4 text-ink-body">
+                                  <CheckCircle2 className="mt-0.5 h-3 w-3 shrink-0 text-state-success" />
+                                  <span>{item}</span>
+                                </p>
+                              ))}
+                            </div>
+                          )}
                         </section>
                       );
                     })}

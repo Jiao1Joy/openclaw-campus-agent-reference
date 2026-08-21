@@ -1,6 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { RouteEvalCase } from './routeEvalTypes.ts';
+import {
+  isValidCapabilityIntentPair,
+  requiredMissingForRoute,
+} from '../server/openclawRouter.ts';
 
 const CAPABILITIES = new Set<string | null>([
   'campus.leave-impact',
@@ -16,6 +20,13 @@ const LEAVE_TYPES = new Set(['病假', '事假', '公假', '其他', '']);
 const PARAMETER_FIELDS = new Set([
   'targetDate', 'startTime', 'endTime', 'timePeriod',
   'timePrecision', 'leaveType', 'reason', 'selectedSectionId',
+]);
+const CATEGORY_BY_CAPABILITY = new Map<string | null, string>([
+  ['campus.leave-impact', 'leave-impact'],
+  ['campus.leave', 'leave'],
+  ['campus.course', 'course'],
+  ['campus.knowledge', 'knowledge'],
+  [null, 'null'],
 ]);
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -57,7 +68,15 @@ function validateRouteCase(value: unknown, line: number): RouteEvalCase {
   }
   assert(isObject(item.expected), `${label}: invalid expected object`);
   assert(CAPABILITIES.has(item.expected.capabilityId), `${label}: capabilityId is not allowed`);
+  assert(
+    CATEGORY_BY_CAPABILITY.get(item.expected.capabilityId) === item.category,
+    `${label}: category does not match capabilityId`,
+  );
   assert(INTENTS.has(item.expected.intent), `${label}: intent is not allowed`);
+  assert(
+    isValidCapabilityIntentPair(item.expected.capabilityId, item.expected.intent),
+    `${label}: capabilityId and intent combination is invalid`,
+  );
   assert(isObject(item.expected.parameters), `${label}: invalid parameters object`);
   assert(Object.keys(item.expected.parameters).length === PARAMETER_FIELDS.size, `${label}: parameters must contain exactly ${PARAMETER_FIELDS.size} fields`);
   assert(Object.keys(item.expected.parameters).every((field) => PARAMETER_FIELDS.has(field)), `${label}: parameters contain an unknown field`);
@@ -78,6 +97,16 @@ function validateRouteCase(value: unknown, line: number): RouteEvalCase {
     `${label}: invalid requiredMissing`,
   );
   assert(new Set(item.expected.requiredMissing).size === item.expected.requiredMissing.length, `${label}: duplicate requiredMissing field`);
+  assert(
+    JSON.stringify(item.expected.requiredMissing) === JSON.stringify(
+      requiredMissingForRoute(
+        item.expected.capabilityId,
+        item.expected.intent,
+        item.expected.parameters,
+      ),
+    ),
+    `${label}: requiredMissing does not match the shared routing protocol`,
+  );
   assert(typeof item.expected.forbiddenWrite === 'boolean', `${label}: invalid forbiddenWrite`);
   assert(Array.isArray(item.tags) && item.tags.length > 0 && item.tags.length <= 12, `${label}: invalid tags`);
   assert(item.tags.every((tag) => typeof tag === 'string' && tag.trim().length > 0 && tag.length <= 30), `${label}: invalid tag value`);
@@ -94,6 +123,10 @@ function validateRouteCase(value: unknown, line: number): RouteEvalCase {
   }
   if (item.expected.intent === 'confirm' || item.expected.intent === 'cancel' || item.expected.intent === 'continue') {
     assert(item.activeExecution !== null, `${label}: ${item.expected.intent} requires activeExecution`);
+    assert(
+      item.activeExecution.capabilityId === item.expected.capabilityId,
+      `${label}: ${item.expected.intent} must target the active capability`,
+    );
   }
   return item;
 }

@@ -43,7 +43,7 @@ export class CampusHttpError extends Error {
 }
 
 const DEMO_PRINCIPAL: CampusPrincipal = Object.freeze({
-  studentId: '202400001',
+  studentId: '202408621',
   studentName: '林同学',
   college: '计算机与人工智能学院',
   className: '软件工程 2401 班',
@@ -110,7 +110,7 @@ export function signCampusToken(payload: JsonObject, secret: string) {
   return `${encoded}.${hmac(encoded, secret).toString('base64url')}`;
 }
 
-function verifyCampusToken(token: string, secret: string): CampusPrincipal {
+export function verifyCampusToken(token: string, secret: string): CampusPrincipal {
   const [encoded, signature, extra] = token.split('.');
   if (!encoded || !signature || extra) {
     throw new CampusHttpError(401, 'INVALID_TOKEN', '登录凭证格式不正确');
@@ -375,6 +375,54 @@ export function requireAnyRole(principal: CampusPrincipal, roles: string[]) {
   if (!roles.some((role) => principal.roles.includes(role))) {
     throw new CampusHttpError(403, 'FORBIDDEN', '当前账号没有执行此操作的权限');
   }
+}
+
+// ---------------------------------------------------------------------------
+// campus-admin (demo administrator) session helpers, plan section 7.1
+// ---------------------------------------------------------------------------
+
+export const CAMPUS_ADMIN_ROLE = 'campus-admin';
+
+export function campusAdminTokenSecret() {
+  const secret =
+    process.env.CAMPUS_DEMO_ADMIN_TOKEN_SECRET || process.env.CAMPUS_AUTH_SECRET || '';
+  if (secret.length < 32) {
+    throw new CampusHttpError(
+      500,
+      'ADMIN_AUTH_CONFIG_INVALID',
+      '管理员令牌密钥尚未配置（CAMPUS_DEMO_ADMIN_TOKEN_SECRET 至少 32 字符）',
+    );
+  }
+  return secret;
+}
+
+export function campusAdminTokenTtlSeconds() {
+  const minutes = Number(process.env.CAMPUS_DEMO_ADMIN_TOKEN_TTL_MINUTES || 120);
+  const bounded = Number.isFinite(minutes) ? Math.min(1440, Math.max(5, minutes)) : 120;
+  return bounded * 60;
+}
+
+export function signCampusAdminToken(username: string) {
+  return signCampusToken(
+    {
+      sub: username,
+      name: '校园管理员',
+      college: '云川大学',
+      className: 'campus-admin',
+      roles: [CAMPUS_ADMIN_ROLE],
+      exp: Math.floor(Date.now() / 1000) + campusAdminTokenTtlSeconds(),
+    },
+    campusAdminTokenSecret(),
+  );
+}
+
+/** Resolve and authorize a campus-admin principal from the Authorization header. */
+export function resolveCampusAdminPrincipal(request: IncomingMessage): CampusPrincipal {
+  const principal = verifyCampusToken(bearerToken(request), campusAdminTokenSecret());
+  if (!principal.roles.includes(CAMPUS_ADMIN_ROLE)) {
+    throw new CampusHttpError(403, 'FORBIDDEN', '当前账号没有执行此操作的权限');
+  }
+  return principal;
 }
 
 export function requestIdFor(request: IncomingMessage) {

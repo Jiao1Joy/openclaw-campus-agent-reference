@@ -24,10 +24,12 @@ def main() -> int:
     target_date = str(arguments.get("targetDate") or "")
     impacts = arguments.get("courseImpacts") or []
     leave = arguments.get("leavePreview") or {}
+    mode = str(arguments.get("mode") or "impact")
     missing = [str(item) for item in leave.get("missing", [])][:8]
     reason = str(leave.get("reason") or "").strip()
     reason_summary = re.sub(r"\b\d{6,}\b", "[已隐藏号码]", reason)[:120]
     state = "collecting" if missing else "awaiting-confirmation"
+    leave_only = mode == "leave-only"
     course_summary = (
         f"发现 {len(impacts)} 门可能受影响的 Demo 课程。"
         if impacts
@@ -38,11 +40,27 @@ def main() -> int:
         if missing
         else "请假信息已齐全，可以展示完整摘要并等待确认。"
     )
+    steps = [
+        {
+            "capabilityId": "campus.course",
+            "label": "查询课程影响",
+            "status": "completed",
+            "summary": course_summary,
+        },
+    ] if not leave_only else []
+    steps.append(
+        {
+            "capabilityId": "campus.leave",
+            "label": "生成请假预览",
+            "status": "waiting" if missing else "completed",
+            "summary": leave_summary,
+        }
+    )
     card = {
         "type": "orchestration-summary",
         "version": 1,
         "id": f"leave-impact:{request['invocationId']}",
-        "title": "请假与课程影响 · Demo",
+        "title": "请假申请 · Demo" if leave_only else "请假与课程影响 · Demo",
         "targetDate": target_date,
         "leave": {
             "type": str(leave.get("leaveType") or ""),
@@ -51,20 +69,7 @@ def main() -> int:
             "reasonSummary": reason_summary,
         },
         "impacts": impacts,
-        "steps": [
-            {
-                "capabilityId": "campus.course",
-                "label": "查询课程影响",
-                "status": "completed",
-                "summary": course_summary,
-            },
-            {
-                "capabilityId": "campus.leave",
-                "label": "生成请假预览",
-                "status": "waiting" if missing else "completed",
-                "summary": leave_summary,
-            },
-        ],
+        "steps": steps,
         "missing": missing,
         "actions": (
             []
@@ -84,6 +89,11 @@ def main() -> int:
         ),
         "demo": True,
     }
+    message = (
+        f"{leave_summary} 当前只生成预览，尚未提交请假。"
+        if leave_only
+        else f"{course_summary}{leave_summary} 当前只生成预览，尚未提交请假。"
+    )
     emit(
         {
             "contract": OUTPUT_CONTRACT,
@@ -91,11 +101,12 @@ def main() -> int:
             "ok": True,
             "operation": request["operation"],
             "state": state,
-            "message": f"{course_summary}{leave_summary} 当前只生成预览，尚未提交请假。",
+            "message": message,
             "data": {
                 "targetDate": target_date,
                 "impactCount": len(impacts),
                 "missing": missing,
+                "mode": mode,
             },
             "cards": [card],
         }
