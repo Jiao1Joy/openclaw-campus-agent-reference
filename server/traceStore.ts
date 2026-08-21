@@ -11,6 +11,15 @@ export type TraceEventType =
   | 'request.completed'
   | 'request.failed';
 
+export type TraceRouteSource =
+  | 'llm'
+  | 'small-model'
+  | 'deterministic-rules'
+  | 'active-execution'
+  | 'confirm-fast-path'
+  | 'execution-action'
+  | 'none';
+
 export interface TraceEventInput {
   requestId: string;
   ownerHash: string;
@@ -21,9 +30,9 @@ export interface TraceEventInput {
   executionId?: string;
   phase?: string;
   status?: string;
-  tool?: 'openclaw-router' | 'openclaw-agent' | 'campus-course' | 'campus-leave' | 'campus-knowledge' | 'campus-agentic-search' | 'campus-leave-impact';
+  tool?: 'openclaw-router' | 'openclaw-agent' | 'campus-course' | 'campus-leave' | 'campus-knowledge' | 'campus-agentic-search' | 'campus-leave-impact' | 'campus-admin-agent';
   durationMs?: number;
-  routeSource?: 'llm' | 'active-execution' | 'none';
+  routeSource?: TraceRouteSource;
   outcome?: 'started' | 'succeeded' | 'failed' | 'cancelled' | 'timed-out';
   errorCode?: string;
   replayed?: boolean;

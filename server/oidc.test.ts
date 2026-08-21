@@ -66,7 +66,7 @@ test('OIDC verifies RS256, issuer, audience, claims, expiry, and JWKS cache', as
     iss: issuer,
     aud: ['campus-api'],
     exp: Math.floor(Date.now() / 1000) + 60,
-    student: { id: '202400001' },
+    student: { id: '202408621' },
     name: '林同学',
     college: '计算机与人工智能学院',
     className: '软件工程 2401 班',
@@ -79,7 +79,7 @@ test('OIDC verifies RS256, issuer, audience, claims, expiry, and JWKS cache', as
     const second = await resolvePrincipal(
       requestWithToken(token(privateKey, basePayload)),
     );
-    assert.equal(first.studentId, '202400001');
+    assert.equal(first.studentId, '202408621');
     assert.equal(first.authMode, 'oidc');
     assert.deepEqual(first.roles, ['student']);
     assert.equal(second.studentId, first.studentId);

@@ -2,6 +2,8 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { handleCampusAssistantRequest } from './campusAssistantPlugin.ts';
+import { handleCampusAdminRequest } from './campusAdminPlugin.ts';
+import { startCampusAdminApprovalWorker } from './campusAdminAgent.ts';
 
 function allowedOrigins() {
   return String(process.env.CAMPUS_ALLOWED_ORIGINS || '')
@@ -48,7 +50,10 @@ function applyCors(request: IncomingMessage, response: ServerResponse) {
     'access-control-allow-headers',
     'Authorization, Content-Type, Idempotency-Key, X-Request-Id',
   );
-  response.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
+  response.setHeader(
+    'access-control-allow-methods',
+    'GET, POST, PUT, PATCH, OPTIONS',
+  );
   response.setHeader('access-control-max-age', '600');
   return true;
 }
@@ -69,15 +74,17 @@ export function createCampusServer() {
       response.end();
       return;
     }
-    void handleCampusAssistantRequest(request, response, () => {
-      if (response.headersSent) return;
-      const payload = JSON.stringify({ error: '接口不存在', code: 'NOT_FOUND' });
-      response.writeHead(404, {
-        'content-type': 'application/json; charset=utf-8',
-        'content-length': Buffer.byteLength(payload),
-        'cache-control': 'no-store',
+    void handleCampusAdminRequest(request, response, () => {
+      void handleCampusAssistantRequest(request, response, () => {
+        if (response.headersSent) return;
+        const payload = JSON.stringify({ error: '接口不存在', code: 'NOT_FOUND' });
+        response.writeHead(404, {
+          'content-type': 'application/json; charset=utf-8',
+          'content-length': Buffer.byteLength(payload),
+          'cache-control': 'no-store',
+        });
+        response.end(payload);
       });
-      response.end(payload);
     });
   });
   server.requestTimeout = requestTimeout();
@@ -101,11 +108,13 @@ function start() {
   const host = process.env.CAMPUS_HOST || '127.0.0.1';
   const port = environmentPort();
   const server = createCampusServer();
+  const stopApprovalWorker = startCampusAdminApprovalWorker();
   server.listen(port, host, () => {
     console.log(`[campus-api] listening on http://${host}:${port}`);
   });
   const shutdown = (signal: string) => {
     console.log(`[campus-api] received ${signal}, shutting down`);
+    stopApprovalWorker();
     server.close((error) => {
       if (error) {
         console.error('[campus-api] shutdown failed', error);

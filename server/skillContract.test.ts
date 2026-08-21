@@ -50,7 +50,7 @@ test('leave-impact skill composes child results without performing a write', asy
   const output = await runJsonStdioSkill(skillRoot, manifest, input);
   assert.equal(output.state, 'awaiting-confirmation');
   assert.equal(output.cards?.[0]?.type, 'orchestration-summary');
-  const card = output.cards?.[0] as Record<string, unknown>;
+  const card = output.cards?.[0] as unknown as Record<string, unknown>;
   assert.deepEqual(card.actions, [
     { kind: 'send-message', label: '确认提交', message: '确认提交' },
     { kind: 'send-message', label: '取消', message: '取消' },

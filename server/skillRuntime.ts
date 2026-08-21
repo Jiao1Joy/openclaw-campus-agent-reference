@@ -65,10 +65,18 @@ export async function runJsonStdioSkill(
   }
   const entrypoint = resolve(skillRoot, manifest.entrypoint.path);
   const timeoutMs = manifest.execution.timeoutMs;
+  const interpreter =
+    manifest.entrypoint.runtime === 'node'
+      ? process.env.NODE_BIN || 'node'
+      : process.env.PYTHON || 'python';
+  const childEnv =
+    manifest.entrypoint.runtime === 'node'
+      ? { ...process.env }
+      : { ...process.env, PYTHONIOENCODING: 'utf-8' };
   const output = await new Promise<string>((resolveOutput, reject) => {
-    const child = spawn(process.env.PYTHON || 'python', [entrypoint], {
+    const child = spawn(interpreter, [entrypoint], {
       cwd: skillRoot,
-      env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
+      env: childEnv,
       windowsHide: true,
       stdio: ['pipe', 'pipe', 'pipe'],
     });

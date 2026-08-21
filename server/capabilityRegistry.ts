@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { isAbsolute, join, normalize, resolve } from 'node:path';
 import type { CampusPrincipal, JsonObject } from './security.ts';
 import {
@@ -33,10 +33,10 @@ interface RegisteredCapability extends CampusCapability {
 }
 
 function workspacePath() {
-  if (process.env.CAMPUS_WORKSPACE) return process.env.CAMPUS_WORKSPACE;
-  const referenceWorkspace = resolve(process.cwd(), 'openclaw-workspace');
-  if (existsSync(referenceWorkspace)) return referenceWorkspace;
-  return join(process.env.USERPROFILE || '', '.openclaw', 'workspace-campus');
+  return (
+    process.env.CAMPUS_WORKSPACE ||
+    join(process.env.USERPROFILE || '', '.openclaw', 'workspace-campus')
+  );
 }
 
 export function discoverCapabilityManifests(

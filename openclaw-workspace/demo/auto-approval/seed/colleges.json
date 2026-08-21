@@ -1,0 +1,56 @@
+[
+  {
+    "id": "COLLEGE-CSAI",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "CSAI",
+    "name": "计算机与人工智能学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  },
+  {
+    "id": "COLLEGE-INFO",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "INFO",
+    "name": "信息工程学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  },
+  {
+    "id": "COLLEGE-MECH",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "MECH",
+    "name": "智能装备学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  },
+  {
+    "id": "COLLEGE-HUMA",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "HUMA",
+    "name": "人文学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  },
+  {
+    "id": "COLLEGE-FOREIGN",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "FOREIGN",
+    "name": "外国语学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  },
+  {
+    "id": "COLLEGE-ECON",
+    "schoolId": "SCH-YUNCHUAN",
+    "code": "ECON",
+    "name": "经济管理学院",
+    "status": "active",
+    "createdAt": "2026-01-10T09:00:00+08:00",
+    "updatedAt": "2026-01-10T09:00:00+08:00"
+  }
+]

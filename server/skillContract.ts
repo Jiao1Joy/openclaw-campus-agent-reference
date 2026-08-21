@@ -32,7 +32,7 @@ export interface SkillManifest {
     output: typeof SKILL_OUTPUT_CONTRACT;
     transport: 'json-stdio' | 'legacy-cli-adapter';
   };
-  entrypoint: { runtime: 'python'; path: string };
+  entrypoint: { runtime: 'python' | 'node'; path: string };
   operations: Array<{
     name: string;
     sideEffect: boolean;
@@ -140,8 +140,16 @@ export function validateSkillManifest(value: unknown): SkillManifest {
   ) {
     throw new Error('Skill 输入输出契约不合法');
   }
-  if (manifest.entrypoint?.runtime !== 'python' || !manifest.entrypoint.path.endsWith('.py')) {
-    throw new Error('当前模板只允许受控 Python 入口');
+  if (manifest.entrypoint?.runtime === 'python') {
+    if (!manifest.entrypoint.path.endsWith('.py')) {
+      throw new Error('Python 入口必须是 .py 脚本');
+    }
+  } else if (manifest.entrypoint?.runtime === 'node') {
+    if (!/\.(ts|mts|js|mjs)$/.test(manifest.entrypoint.path)) {
+      throw new Error('Node 入口必须是 .ts/.js 脚本');
+    }
+  } else {
+    throw new Error('entrypoint.runtime 只支持 python 或 node');
   }
   if (
     manifest.entrypoint.path.includes('..') ||

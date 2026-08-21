@@ -1,0 +1,4802 @@
+[
+  {
+    "studentNo": "2023010101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023010120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024010220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025010320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026010420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-CSAI",
+    "classId": "CLASS-CSAI-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023020120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024020220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025020320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026020420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-INFO",
+    "classId": "CLASS-INFO-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023030120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024030220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025030320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026030420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-MECH",
+    "classId": "CLASS-MECH-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023040120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024040220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025040320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026040420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-HUMA",
+    "classId": "CLASS-HUMA-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023050120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024050220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025050320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026050420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-FOREIGN",
+    "classId": "CLASS-FOREIGN-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060101",
+    "name": "林同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060102",
+    "name": "周同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060103",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060104",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060105",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060106",
+    "name": "王同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060107",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060108",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060109",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060110",
+    "name": "李同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060111",
+    "name": "张同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060112",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060113",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060114",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060115",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060116",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060117",
+    "name": "高同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060118",
+    "name": "马同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060119",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2023060120",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2301",
+    "enrollmentYear": 2023,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060201",
+    "name": "林同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060202",
+    "name": "周同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060203",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060204",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060205",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060206",
+    "name": "王同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060207",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060208",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060209",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060210",
+    "name": "李同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060211",
+    "name": "张同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060212",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060213",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060214",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060215",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060216",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060217",
+    "name": "高同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060218",
+    "name": "马同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060219",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2024060220",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2402",
+    "enrollmentYear": 2024,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060301",
+    "name": "林同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060302",
+    "name": "周同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060303",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060304",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060305",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060306",
+    "name": "王同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060307",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060308",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060309",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060310",
+    "name": "李同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060311",
+    "name": "张同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060312",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060313",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060314",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060315",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060316",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060317",
+    "name": "高同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060318",
+    "name": "马同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060319",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2025060320",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2503",
+    "enrollmentYear": 2025,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060401",
+    "name": "林同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060402",
+    "name": "周同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060403",
+    "name": "陈同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060404",
+    "name": "吴同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060405",
+    "name": "郑同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060406",
+    "name": "王同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060407",
+    "name": "赵同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060408",
+    "name": "孙同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060409",
+    "name": "钱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060410",
+    "name": "李同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060411",
+    "name": "张同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060412",
+    "name": "刘同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060413",
+    "name": "杨同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060414",
+    "name": "黄同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060415",
+    "name": "徐同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060416",
+    "name": "朱同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060417",
+    "name": "高同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060418",
+    "name": "马同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060419",
+    "name": "罗同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  },
+  {
+    "studentNo": "2026060420",
+    "name": "梁同学",
+    "collegeId": "COLLEGE-ECON",
+    "classId": "CLASS-ECON-2604",
+    "enrollmentYear": 2026,
+    "status": "active",
+    "createdAt": "2026-01-15T09:00:00+08:00",
+    "updatedAt": "2026-01-15T09:00:00+08:00"
+  }
+]

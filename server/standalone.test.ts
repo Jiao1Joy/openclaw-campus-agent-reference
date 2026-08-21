@@ -53,6 +53,22 @@ test('standalone server applies origin policy and serves the campus API', async 
       String(preflight.headers.get('access-control-allow-headers')),
       /Idempotency-Key/,
     );
+    // the admin console edits school data with PATCH and saves rules with PUT;
+    // both must survive cross-origin preflights in standalone deployments
+    for (const method of ['PATCH', 'PUT'] as const) {
+      const methodPreflight = await fetch(`${baseUrl}/api/campus-admin/students/x`, {
+        method: 'OPTIONS',
+        headers: {
+          origin: 'http://127.0.0.1:4173',
+          'access-control-request-method': method,
+        },
+      });
+      assert.equal(methodPreflight.status, 204);
+      assert.match(
+        String(methodPreflight.headers.get('access-control-allow-methods') || ''),
+        new RegExp(method),
+      );
+    }
 
     const rejected = await fetch(`${baseUrl}/api/campus-assistant/health`, {
       headers: { origin: 'https://untrusted.example' },

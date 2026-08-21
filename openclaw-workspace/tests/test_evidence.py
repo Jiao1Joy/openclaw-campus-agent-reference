@@ -10,8 +10,12 @@ from pathlib import Path
 
 
 WORKSPACE = Path(__file__).resolve().parents[1]
-LEAVE_ENGINE = WORKSPACE / "skills" / "campus-leave" / "scripts" / "leave_manager.py"
 COURSE_ENGINE = WORKSPACE / "skills" / "campus-course" / "scripts" / "course_manager.py"
+
+# NOTE: the leave scenarios that used to live here (create idempotency,
+# rollback idempotency, audit chain verification) moved to the TypeScript
+# suite at campus-services/src/test/leaveService.test.ts when the leave
+# engine migrated from the shared python workspace to campus-services.
 
 
 def run_json(script: Path, arguments: list[str], env: dict[str, str]) -> dict:
@@ -29,68 +33,6 @@ def run_json(script: Path, arguments: list[str], env: dict[str, str]) -> dict:
         raise AssertionError(f"engine did not return JSON: {result.stdout}\n{result.stderr}") from exc
     payload["_exitCode"] = result.returncode
     return payload
-
-
-class LeaveEvidenceTests(unittest.TestCase):
-    def test_create_and_rollback_are_idempotent_and_audited(self) -> None:
-        with tempfile.TemporaryDirectory(prefix="campus-leave-test-") as directory:
-            root = Path(directory)
-            env = {
-                "CAMPUS_LEAVE_DATA_FILE": str(root / "leave.json"),
-                "CAMPUS_LEAVE_AUDIT_FILE": str(root / "leave-audit.jsonl"),
-                "CAMPUS_REQUEST_ID": "test-request-create",
-                "CAMPUS_IDEMPOTENCY_KEY": "leave-create-key-0001",
-            }
-            arguments = [
-                "create",
-                "--student-id",
-                "202400001",
-                "--student-name",
-                "林同学",
-                "--college",
-                "计算机与人工智能学院",
-                "--class-name",
-                "软件工程 2401 班",
-                "--leave-type",
-                "病假",
-                "--start",
-                "2026-08-12T08:00:00+08:00",
-                "--end",
-                "2026-08-12T12:00:00+08:00",
-                "--reason",
-                "发烧前往校医院就诊",
-            ]
-            created = run_json(LEAVE_ENGINE, arguments, env)
-            replayed = run_json(LEAVE_ENGINE, arguments, env)
-            self.assertTrue(created["ok"])
-            self.assertFalse(created["idempotent"])
-            self.assertTrue(replayed["idempotent"])
-            self.assertEqual(created["request"]["id"], replayed["request"]["id"])
-
-            rollback_env = {
-                **env,
-                "CAMPUS_REQUEST_ID": "test-request-rollback",
-                "CAMPUS_IDEMPOTENCY_KEY": "leave-rollback-key-0001",
-                "CAMPUS_AUDIT_SECRET": "test-audit-secret-longer-than-thirty-two-characters",
-            }
-            rollback_arguments = [
-                "cancel",
-                "--student-id",
-                "202400001",
-                "--request-id",
-                created["request"]["id"],
-                "--reason",
-                "学生撤回本次测试申请",
-            ]
-            rolled_back = run_json(LEAVE_ENGINE, rollback_arguments, rollback_env)
-            rollback_replay = run_json(LEAVE_ENGINE, rollback_arguments, rollback_env)
-            self.assertEqual(rolled_back["request"]["status"], "cancelled")
-            self.assertFalse(rolled_back["idempotent"])
-            self.assertTrue(rollback_replay["idempotent"])
-
-            verified = run_json(LEAVE_ENGINE, ["verify-audit"], rollback_env)
-            self.assertTrue(verified["ok"])
-            self.assertGreaterEqual(verified["events"], 6)
 
 
 class CourseEvidenceTests(unittest.TestCase):
@@ -114,7 +56,7 @@ class CourseEvidenceTests(unittest.TestCase):
                 [
                     "plan",
                     "--student-id",
-                    "202400001",
+                    "202408621",
                     "--choice",
                     "PE201=PE201-02",
                 ],
@@ -130,7 +72,7 @@ class CourseEvidenceTests(unittest.TestCase):
             submit_arguments = [
                 "submit",
                 "--student-id",
-                "202400001",
+                "202408621",
                 "--plan-token",
                 planned["planToken"],
             ]
@@ -151,7 +93,7 @@ class CourseEvidenceTests(unittest.TestCase):
             rollback_arguments = [
                 "rollback",
                 "--student-id",
-                "202400001",
+                "202408621",
                 "--submission-id",
                 submitted["submission"]["submissionId"],
                 "--reason",
@@ -189,7 +131,7 @@ class CourseEvidenceTests(unittest.TestCase):
                         "schemaVersion": 1,
                         "transactionId": "TX-PARTIAL-TEST",
                         "operation": "course.submit",
-                        "studentId": "202400001",
+                        "studentId": "202408621",
                         "resourceId": "CS-PARTIAL-TEST",
                         "createdAt": "2026-08-11T10:00:00+08:00",
                         "beforeEnrollment": {"CS301-01": before},

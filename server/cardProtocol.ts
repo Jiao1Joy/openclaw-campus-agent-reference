@@ -1,8 +1,14 @@
-export interface CardAction {
-  kind: 'send-message';
+export interface ExecutionAction {
+  kind: 'execution-action';
+  action: 'confirm' | 'cancel';
   label: string;
-  message: string;
+  executionId: string;
+  previewHash: string;
 }
+
+export type CardAction =
+  | { kind: 'send-message'; label: string; message: string }
+  | ExecutionAction;
 
 export interface TeacherChoiceCard {
   type: 'teacher-choice';
@@ -120,8 +126,8 @@ export function validateResultCards(cards: CampusResultCard[]) {
         text(option.profileSummary, 'profileSummary', 500);
         if (option.researchAreas.length > 8) throw new Error('研究方向数量超限');
         text(option.action.label, 'action.label', 40);
-        text(option.action.message, 'action.message', 300);
         if (option.action.kind !== 'send-message') throw new Error('卡片动作未被允许');
+        text(option.action.message, 'action.message', 300);
       }
     } else if (card.type === 'knowledge-source') {
       text(card.content, 'content', 3000);
@@ -158,11 +164,25 @@ export function validateResultCards(cards: CampusResultCard[]) {
         text(step.summary, 'step.summary', 300);
       }
       for (const action of card.actions) {
-        if (action.kind !== 'send-message') throw new Error('卡片动作未被允许');
-        text(action.label, 'action.label', 20);
-        text(action.message, 'action.message', 20);
-        if (!['确认提交', '取消'].includes(action.message)) {
-          throw new Error('编排卡片动作消息未被允许');
+        if (action.kind === 'send-message') {
+          text(action.label, 'action.label', 20);
+          text(action.message, 'action.message', 20);
+          if (!['确认提交', '取消'].includes(action.message)) {
+            throw new Error('编排卡片动作消息未被允许');
+          }
+        } else if (action.kind === 'execution-action') {
+          text(action.label, 'action.label', 20);
+          if (!/^EX-[A-Za-z0-9-]{8,80}$/.test(action.executionId)) {
+            throw new Error('编排卡片动作执行编号不符合协议');
+          }
+          if (!/^[a-f0-9]{64}$/.test(action.previewHash)) {
+            throw new Error('编排卡片动作预览哈希不符合协议');
+          }
+          if (!['confirm', 'cancel'].includes(action.action)) {
+            throw new Error('编排卡片动作类型未被允许');
+          }
+        } else {
+          throw new Error('卡片动作未被允许');
         }
       }
       if (card.missing.length && card.actions.length) {

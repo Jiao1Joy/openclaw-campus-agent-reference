@@ -15,23 +15,7 @@ dist-server
 *.tsbuildinfo
 evals/results/*.jsonl
 evals/results/*.md
-
-# OpenClaw runtime state: only the committed Demo baseline belongs in source control.
-openclaw-workspace/data/*
-!openclaw-workspace/data/course-data.json
-openclaw-workspace/data/**/*.lock
-openclaw-workspace/data/**/*-transaction.json
-openclaw-workspace/openclaw-workspace-state.json
-
-# Python caches
-__pycache__/
-*.py[cod]
-
-# Local secrets and OpenClaw machine configuration
-.env
-.env.*
-!.env.example
-openclaw.json
+evals/results/*.lock
 
 # Editor directories and files
 .vscode/*

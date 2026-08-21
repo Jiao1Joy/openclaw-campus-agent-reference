@@ -14,7 +14,7 @@
   "execution": { "confirmation": "explicit-before-write", "idempotent": true, "auditable": true, "rollback": "student-cancel", "timeoutMs": 20000 },
   "resultCards": ["action-result"],
   "contract": { "input": "campus-skill-input@1", "output": "campus-skill-output@1", "transport": "legacy-cli-adapter" },
-  "entrypoint": { "runtime": "python", "path": "scripts/leave_manager.py" },
+  "entrypoint": { "runtime": "node", "path": "scripts/leave_manager.mts" },
   "operations": [
     { "name": "create", "sideEffect": true, "confirmation": "explicit-before-write" },
     { "name": "list", "sideEffect": false, "confirmation": "none" },

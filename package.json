@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run validate:skills && tsc -b && vite build && npm run build:server",
+    "build": "npm run validate:skills && tsc -b && tsc --noEmit -p tsconfig.node.json && vite build && npm run build:server",
     "build:server": "vite build --config vite.server.config.ts",
     "preview": "vite preview",
     "start:server": "node dist-server/standalone.js",
-    "test": "node --experimental-strip-types --test server/security.test.ts server/oidc.test.ts server/capabilityRegistry.test.ts server/cardProtocol.test.ts server/skillContract.test.ts server/executionState.test.ts server/traceStore.test.ts server/openclawRouter.test.ts server/agenticSearch.test.ts server/campusAssistantPlugin.test.ts server/standalone.test.ts",
+    "test": "node --experimental-strip-types --test server/security.test.ts server/oidc.test.ts server/capabilityRegistry.test.ts server/cardProtocol.test.ts server/skillContract.test.ts server/executionState.test.ts server/traceStore.test.ts server/openclawRouter.test.ts server/agenticSearch.test.ts server/campusAssistantPlugin.test.ts server/confirmFastPath.test.ts server/campusAssistantUiState.test.ts server/campusAdminPlugin.test.ts server/standalone.test.ts",
     "eval:check": "tsc -p tsconfig.evals.json && node --experimental-strip-types --test evals/runRouteEval.test.ts",
     "eval:validate": "node --experimental-strip-types evals/validateFixtures.ts",
     "eval:route": "node --experimental-strip-types evals/runRouteEval.ts",
